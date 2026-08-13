@@ -350,7 +350,6 @@ loader.load(
       // EXACT match for mixamorigHead (ignoring HeadTop_End)
       if (child.name === 'mixamorigHead') {
         headBone = child;
-        console.log('✅ TARGETED HEAD BONE LOCKED:', headBone.name);
       }
     });
 
@@ -381,7 +380,6 @@ loader.load(
 
     // Animations Setup
     if (gltf.animations.length) {
-      console.log('Animations:', gltf.animations.map(a => a.name));
 
       // 🛑 CRITICAL FIX: Delete keyframe tracks belonging to Head Bone 
       // so AnimationMixer doesn't override dynamic cursor movement
@@ -423,7 +421,7 @@ loader.load(
 
     } else console.warn('No animations found');
   },
-  (xhr) => { if (xhr.total > 0) console.log((xhr.loaded / xhr.total * 100).toFixed(0) + '%'); },
+  (xhr) => { if (xhr.total > 0); },
   (err) => console.error('Load error:', err)
 );
 
