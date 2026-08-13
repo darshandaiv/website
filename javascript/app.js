@@ -349,7 +349,7 @@ window.getCam = function () {
 const loader = new GLTFLoader();
 
 loader.load(
-  '../assets/models/Web_Hero_Concept.glb',
+  '/assets/models/Web_Hero_Concept.glb',
   (gltf) => {
     const model = gltf.scene;
 

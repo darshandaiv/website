@@ -74,6 +74,8 @@ function renderWorkSection() {
 
     window.initInteractions(grid);
     attachWorkCardVideoHover(grid);
+    window.renderWorkSection = renderWorkSection;
+
 }
 
 /* ----------------------------------------------------------------
