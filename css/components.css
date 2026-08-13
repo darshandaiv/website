@@ -1,0 +1,222 @@
+/* ============================================================
+   COMPONENTS.CSS — Reusable cards, grids, pills, chips
+   Shared across index.html (Work section), projects/index.html
+   (All Projects grid), and expedition.html (logo ticker).
+   REQUIRES: root.css loaded first (uses --page-padding, --border,
+   --surface, --accent-pink, typography preset tokens, etc).
+============================================================ */
+
+/* ------------------------------------------------------------
+   1. WORK CARD — used in homepage grid + all-projects grid
+   Structure expected (built dynamically by cms-projects.js):
+   .work-card > a > .work-thumb (img.work-thumb-img +
+   video.work-thumb-video) + .work-info (h3.work-title + svg)
+------------------------------------------------------------ */
+.work-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    min-height: 500px;
+    position: relative;
+    transition: border-color .35s, transform .5s var(--ease-out-expo);
+}
+.work-card a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    gap: 16px;
+    flex-direction: column;
+    pointer-events: auto;
+}
+
+/* Thumbnail container — anchors the absolutely-positioned
+   img/video stack. NOTE: display:flex intentionally omitted —
+   it previously caused img + video to render side-by-side
+   (50:50 split) instead of stacked. Do not re-add without
+   re-testing the hover-video overlay. */
+.work-thumb {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: var(--br-small);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 2;
+    transition: height .5s var(--ease-out-expo), border-radius .5s var(--ease-out-expo);
+    pointer-events: auto; /* Prevents child hover events (svg/title) from re-firing mouseenter and restarting the preview video */
+}
+
+.work-thumb-img,
+.work-thumb-video {
+    position: absolute !important;
+    top: 0; left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: var(--br-small);
+    pointer-events: none;
+}
+.work-thumb-img { z-index: 1; }
+.work-thumb-video {
+    z-index: 2;
+    opacity: 0;
+    transition: opacity .35s var(--ease-smooth);
+}
+[data-video-hover].video-active .work-thumb-video { opacity: 1; }
+
+.work-info {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--br-padding);
+    pointer-events: none;
+}
+.work-arrow { display: flex; flex-direction: row; }
+
+/* .work-title now sources its type styling from the .text-heading
+   preset in root.css — kept as a selector alias there, no
+   duplicate font rules needed here. */
+
+/* ------------------------------------------------------------
+   2. TAG CHIP — filter pills & (optionally) work card tags
+------------------------------------------------------------ */
+.chip {
+    font-family: var(--bodyFont);
+    background-color: var(--surface);
+    font-size: .6rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    border-radius: var(--br-large);
+    padding: 4px 8px;
+    color: var(--text-muted);
+    transition: border-color .3s, color .3s;
+}
+
+/* ------------------------------------------------------------
+   3. FILTER PILLS (projects/index.html)
+------------------------------------------------------------ */
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 48px;
+}
+.filter-pill {
+    font-family: var(--bodyFont);
+    border: none;
+    border-radius: var(--br-large);
+    padding: 9px 20px;
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--surface);
+    cursor: none;
+    transition: border-color .3s, color .3s, background .3s;
+}
+.filter-pill:hover { background: var(--border-hover); color: var(--white); }
+.filter-pill.active {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: var(--white);
+}
+
+/* ------------------------------------------------------------
+   4. WORK GRID — 12-col, 2-up (used by both homepage #workGrid
+   AND projects/index.html #allProjectsGrid — both use the SAME
+   .all-projects-grid class in the actual HTML).
+------------------------------------------------------------ */
+#work { padding: 120px 0 20px 0; border-top: 1px solid var(--border); }
+
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+/* FIX: .all-projects-grid was missing its display:grid definition
+   after the CSS split — this is the class actually used in HTML on
+   both index.html (#workGrid) and projects/index.html
+   (#allProjectsGrid). Without this rule, cards fell back to block
+   layout and stretched full-width at every screen size. */
+.all-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 14px;
+}
+.all-projects-grid .work-card { grid-column: span 6; }
+
+.grid-empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-muted);
+    font-size: .95rem;
+}
+
+@media (max-width: 768px) {
+    #work { padding: 60px 0 20px 0; }
+    .all-projects-grid { grid-template-columns: 1fr; }
+    .all-projects-grid .work-card { grid-column: span 12; }
+    .work-card:hover { transform: translateY(-4px); }
+    .filter-pill{ padding: 8px 10px; }
+}
+
+/* ------------------------------------------------------------
+   5. LOGO TICKER — JS-driven infinite scroll (logo-ticker.js)
+   Used on index.html and expedition.html.
+------------------------------------------------------------ */
+.logo-ticker-section { padding: 60px 0; overflow: hidden; }
+
+.logo-ticker-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.logo-ticker-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    will-change: transform;
+    /* NOTE: no CSS animation/@keyframes here on purpose — transform
+       is driven entirely by logo-ticker.js every frame via rAF. */
+}
+
+/* Fixed bounding box per logo + object-fit:contain — this is what
+   normalizes visually inconsistent source logo dimensions/ratios
+   without distorting any of them. */
+.logo-ticker-item {
+    flex: 0 0 auto;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 60px;
+}
+.logo-ticker-item img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(1.6) opacity(0.55);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+.logo-ticker-item img:hover {
+    filter: grayscale(0%) brightness(1) opacity(1);
+    transform: scale(1.01);
+}
+
+@media (max-width: 900px) { .logo-ticker-item { height: 70px; margin: 0 36px; } }
+@media (max-width: 600px) { .logo-ticker-item { height: 60px; margin: 0 32px; } }
+
+@media (prefers-reduced-motion: reduce) {
+    .logo-ticker-track { transform: none !important; }
+    .logo-ticker-wrap { overflow-x: auto; }
+}

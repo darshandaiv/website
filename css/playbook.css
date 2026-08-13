@@ -1,0 +1,104 @@
+/* ============================================================
+   PLAYBOOK.CSS — Alternating media/text stack layout
+   REQUIRES: root.css loaded first.
+
+   PADDING SYSTEM: .playbook-text uses .container-text (wider
+   mobile inset, pure text). .playbook-media uses .container
+   (standard inset) when it needs any inset at all — but since
+   images should maximize viewing area, .playbook-media itself
+   carries NO container class; its own max-width:60vw cap already
+   constrains it without needing side padding.
+   FIX: removed .playbook-text's hardcoded "padding: 0 18px" —
+   was double-padding on top of the container class, the bug
+   causing text to sit at the wrong inset.
+------------------------------------------------------------ */
+
+.playbook-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 140px;
+}
+
+.playbook-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: fit-content;
+    gap: 48px;
+    height: fit-content;
+}
+
+.playbook-media {
+    max-width: 60vw;
+    min-width: 0;
+    height: auto;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+}
+
+.playbook-image {
+    border-radius: var(--br-small);
+    aspect-ratio: auto;
+    width: 100%;
+    height: fit-content;
+    max-height: 80vh;
+}
+
+.playbook-text {
+    width: fit-content;
+    height: fit-content;
+    color: var(--muted-white);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.section-description {
+    width: 300px;
+    font-size: clamp(0.6rem, 6vw, 0.85rem);
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: var(--bodyFont);
+    color: var(--text-secondary);
+}
+
+/* ------------------------------------------------------------
+   RESPONSIVE
+------------------------------------------------------------ */
+@media (max-width: 768px) {
+    .playbook-content {
+        flex-direction: column;
+        gap: 32px;
+    }
+    .playbook-media {
+        order: 1;
+        max-width: 100%;
+        height: auto;
+    }
+    .playbook-text {
+        order: 2;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .playbook-content {
+        width: 100%;
+        height: fit-content;
+        max-height: fit-content;
+    }
+    .playbook-media {
+        width: 100%;
+        height: fit-content;
+        max-height: fit-content;
+    }
+    .playbook-image {
+        height: fit-content;
+        width: 100%;
+        max-height: fit-content;
+    }
+    .section-description {
+        width: 90%;
+    }
+}

@@ -1,0 +1,306 @@
+/* ============================================================
+   EXPEDITION.CSS — About/Experience blocks + Interactive Showcase
+   Used exclusively by expedition.html.
+   REQUIRES: root.css loaded first (components.css also loaded
+   for .logo-ticker-* used further down this page).
+
+   NOTE: This file previously included a large commented-out block
+   for a 9-image, 3-wave parallax "expedition stage"
+   (#exp-fixed-stage, .exp-parallax-img, #exp-img1–9, .huge-title,
+   .exp-wave-text) tied to expedition.js. Both the script and this
+   CSS are confirmed unused — that entire <section id="expedition">
+   HTML block is commented out in expedition.html, and about-summary.js
+   now covers that content instead. Removed entirely per confirmation.
+------------------------------------------------------------ */
+
+/* ------------------------------------------------------------
+   1. INTERACTIVE SHOWCASE (nav list + crossfading image + text)
+   Driven by about-summary.js. mix-blend-mode: difference is used
+   throughout so the dynamic text always stays legible over any
+   image behind it — do not remove those blend-mode rules without
+   also revisiting the underlying image treatment.
+------------------------------------------------------------ */
+#interactive-showcase {
+    /* Layout tuning knobs — safe to adjust these without touching
+       any rule below, everything derives from them. */
+    --image-height: 75vh;
+    --overlap-offset: -65%;
+    --image-width-ratio: 35vw;
+    --image-fade-duration: 0.8s;
+
+    width: 100%;
+    min-height: 100vh;
+    padding: 120px 0 20px 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate; /* REQUIRED: groups image + text into one blend layer for mix-blend-mode: difference to work correctly */
+}
+
+#interactive-showcase,
+.showcase-container {
+    height: fit-content;
+    max-width: 100%;
+}
+.showcase-container {
+    width: 100%;
+    margin: 0 auto;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    position: relative;
+}
+
+@media (min-width: 900px) {
+    .showcase-container {
+        grid-template-columns: 1fr var(--image-width-ratio);
+        align-items: flex-start;
+        justify-content: start;
+        gap: 0;
+        height: var(--image-height);
+    }
+}
+
+.showcase-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 5;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    pointer-events: none; /* Passes clicks through empty space; re-enabled selectively below */
+}
+
+.showcase-nav { margin-bottom: 2rem; pointer-events: auto; }
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.nav-item {
+    background: none;
+    border: none;
+    font-family: var(--bodyFont);
+    font-size: clamp(0.7rem, 6vw, 0.8rem);
+    font-weight: 500;
+    letter-spacing: .08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    text-align: start;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.nav-item:hover,
+.nav-item.active { color: var(--muted-white); }
+
+.showcase-content {
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    margin-top: auto; /* Pins text block to bottom of column */
+}
+
+/* .showcase-text base typography now sourced from .text-ticker-title
+   preset in root.css. Blend-mode + color overrides below are
+   showcase-specific and must stay separate from the shared preset. */
+.showcase-text {
+    width: 100%;
+    color: var(--muted-white);
+    text-align: start;
+    margin: 0;
+}
+
+.showcase-right {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+    z-index: 1;
+}
+@media (min-width: 900px) {
+    .showcase-right {
+        margin-left: var(--overlap-offset);
+        width: calc(100% - var(--overlap-offset));
+        height: var(--image-height);
+    }
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+}
+
+.showcase-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: var(--br-small);
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity var(--image-fade-duration) cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: opacity;
+}
+.showcase-img.active { opacity: 1; z-index: 2; }
+.showcase-img.next   { opacity: 1; z-index: 3; } /* Crossfades on top of .active during transition */
+
+/* ------------------------------------------------------------
+   2. CROP-REVEAL DIFFERENCE-BLEND OVERRIDES (showcase text only)
+   REQUIRED: opacity must stay 1 on .crop-reveal-inner here — the
+   crop-reveal engine normally animates opacity 0→1, but that
+   breaks mix-blend-mode: difference mid-transition. Position/
+   transform still animates normally; only opacity is pinned.
+------------------------------------------------------------ */
+.crop-word-wrapper,
+.showcase-text .crop-reveal-mask,
+.showcase-text .crop-reveal-inner {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    line-height: inherit;
+}
+.crop-word-wrapper { display: inline-block; white-space: nowrap; }
+
+/* ------------------------------------------------------------
+   3. ABOUT / EXPERIENCE / EDUCATION / ACHIEVEMENTS BLOCKS
+------------------------------------------------------------ */
+.about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.all-about {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    gap: 48px;
+}
+.about-label {
+    display: flex;
+    flex-direction: column;
+    padding-top: 72px;
+    width: 30%;
+    gap: 24px;
+}
+.about-cards {
+    display: flex;
+    flex-direction: column;
+    padding: 72px 0;
+    width: 70%;
+    gap: 24px;
+}
+
+/* .all-about h3 (Experience/Education/etc heading) now sourced
+   from a subtitle-weight variant — kept distinct here since it's
+   slightly smaller than .text-title but larger than .text-heading. */
+.all-about h3 {
+    font-family: var(--font);
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    font-weight: 400;
+    letter-spacing: -.02em;
+    color: var(--muted-white);
+    margin-bottom: 8px;
+}
+
+.list-of-mini { display: flex; flex-direction: column; gap: 12px; }
+
+.resp-mini { display: flex; flex-direction: row; width: 100%; }
+
+.mini-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.mini-experience {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 0;
+}
+
+/* Layout-only now — font properties come from the .text-* preset
+   class added alongside in HTML (e.g. class="mini-title text-heading") */
+.mini-title {
+    color: var(--muted-white) !important;
+    font-family: var(--font);
+    width: 57%;
+    text-align: left;
+}
+.mini-category { width: 33%; text-align: left; }
+.mini-year { width: 10%; text-align: right; }
+
+/* FIX: removed display:flex — .mini-info is a single plain
+   paragraph, not a row of items. The old flex+nowrap layout forced
+   every word-mask span (from data-crop-unit="word") onto one line,
+   squeezing/overlapping them — this was the actual cause of the
+   corrupted text in the screenshot. */
+.mini-info {
+    display: block;
+    text-align: left;
+    width: 100%;
+    height: fit-content;
+}
+
+.mini-title > span:not(.crop-word-wrapper):not(.crop-reveal-mask) {
+    font-family: var(--bodyFont);
+    font-weight: 500;
+    letter-spacing: .08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.bet-img img {
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+}
+
+/* ------------------------------------------------------------
+   RESPONSIVE
+------------------------------------------------------------ */
+@media (max-width: 1200px) {
+    .all-about { flex-direction: column; gap: 32px; }
+    .about-cards { width: 100%; padding: 48px 0; }
+    .about-label { width: 100%;}
+}
+
+@media (max-width: 768px) {
+    .mini-wrapper {
+        align-items: flex-start;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 12px;
+    }
+    .mini-experience {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 24px;
+    }
+    .resp-mini { flex-direction: column; gap: 12px; }
+    .mini-category, .mini-title { width: 100%; text-align: left; }
+    .about-cards { width: 100%; padding: 24px 0;}
+    .about-label { width: 100%;}
+}
+
+@media (max-width: 480px) {
+    .mini-title span { display: none; }
+}

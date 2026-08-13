@@ -1,0 +1,402 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expeditions</title>
+
+    <link rel="icon" type="image/svg+xml" href="../assets/svg/logo.svg">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+</head>
+<body>
+
+<!-- ─── CUSTOM CURSOR ────────────────────────────────────────────── -->
+<div class="cursor-dot" id="cursorDot" data-distort-ignore>
+    <svg width="18" height="18" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 0C22.7614 0 25 2.23858 25 5V19.6729C25 22.4343 27.2386 24.6729 30 24.6729H44.7852C47.5466 24.6729 49.7852 26.9114 49.7852 29.6729V44.6729C49.7852 47.4343 47.5466 49.6729 44.7852 49.6729H29.7852C27.0237 49.6729 24.7852 47.4343 24.7852 44.6729V30C24.7852 27.2386 22.5466 25 19.7852 25H5C2.23858 25 0 22.7614 0 20V5C0 2.23858 2.23858 0 5 0H20Z" fill="#ffffff"></path>
+    </svg>
+</div>
+<div class="cursor-ring" id="cursorRing" data-distort-ignore></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════════════════ -->
+<nav id="navbar" data-distort-ignore>
+    <div class="nav-left">
+        <a href="/" class="nav-logo">
+            <dotlottie-wc src="https://lottie.host/7c3f829d-5d73-4b70-8436-db010b175a88/NbOVLTg7fL.lottie" style="width: 40px;height: 40px" autoplay loop></dotlottie-wc>
+        </a>
+    </div>
+    <div class="nav-right">
+        <button class="hamburger" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FULLSCREEN MENU
+═══════════════════════════════════════════════════════════════ -->
+<div class="fs-menu" id="fsMenu" role="dialog" aria-modal="true" aria-label="Site navigation" data-distort-ignore>
+    <div class="ascii-media">
+        <video id="display-video" autoplay muted loop playsinline>
+            <source id="video-source" src="" type="video/mp4">
+        </video>
+    </div>
+    <div class="fs-menu-inner">
+        <ul class="fs-nav-list">
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/"><span class="fs-nav-num">01 </span>Home</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/projects/"><span class="fs-nav-num">02 </span>Projects</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/expedition" aria-current="page"><span class="fs-nav-num">03 </span>Expeditions</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/playbook"><span class="fs-nav-num">04 </span>PlayBook</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/hello"><span class="fs-nav-num">05 </span>Say Hello!</a></li>
+        </ul>
+    </div>
+    <div class="fs-menu-footer">
+        <div class="fs-footer-links">
+            <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+        </div>
+        <span class="fs-footer-mail">darshandaiv@gmail.com</span>
+    </div>
+</div>
+
+<!-- ─── INTERACTIVE SHOWCASE ───────────────────────────────────────
+     PADDING SYSTEM: .showcase-container itself carries NO container
+     class — it stays full-bleed so the grid's two columns can use
+     100% of the available width. Padding is applied selectively:
+       • .showcase-left  → .container-text (nav + dynamic text: gets
+         the WIDER inset, since it's pure text)
+       • .showcase-right → no class at all (the image column: stays
+         edge-to-edge, maximizing viewing area on mobile)
+═══════════════════════════════════════════════════════════════ -->
+<section id="interactive-showcase">
+    <div class="showcase-container">
+        <div class="showcase-left container-text">
+            <nav class="showcase-nav" aria-label="Showcase Sections">
+                <ul class="nav-list" id="showcaseNav">
+                    <!-- JS generated list items -->
+                </ul>
+            </nav>
+
+            <div class="showcase-content">
+                <p class="showcase-text"
+                    id="showcaseText"
+                    data-crop-reveal="true"
+                    data-crop-unit="word"
+                    data-crop-speed="0.25"
+                    data-crop-exit-speed="0.25"
+                    data-crop-stagger="15"
+                    data-crop-delay="0"
+                    data-crop-distance-in="80px"
+                    data-crop-distance-out="80px">
+                </p>
+            </div>
+        </div>
+
+        <div class="showcase-right container">
+            <div class="image-wrapper">
+                <img id="showcaseImageActive" class="showcase-img active" src="" alt="Active Visual">
+                <img id="showcaseImageNext" class="showcase-img" src="" alt="Next Visual">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── MARQUEE / LOGO TICKER ────────────────────────────────────── 
+     PADDING SYSTEM: intentionally NO container class — pure images,
+     stretches 100% edge-to-edge by default (the "no class = full
+     width" rule).
+═══════════════════════════════════════════════════════════════ -->
+<section class="logo-ticker-section">
+    <div class="logo-ticker-wrap">
+        <div class="logo-ticker-track">
+            <!-- Set 1 -->
+            <div class="logo-ticker-item"><img src="../assets/logos/Google.svg" alt="Google"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Amazon.svg" alt="Amazon"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Infosys.svg" alt="Infosys"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/One8.svg" alt="One8"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Cunin.svg" alt="Cunin"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Naturals.svg" alt="Naturals"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Odonil.svg" alt="Odonil"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Tata.svg" alt="Tata"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Flipkart.svg" alt="Flipkart"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Spoyl.svg" alt="Spoyl"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Pastel.svg" alt="Pastel"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Ecoverse.svg" alt="Ecoverse"></div>
+
+            <!-- Set 2 — EXACT duplicate, required for the seamless infinite loop -->
+            <div class="logo-ticker-item"><img src="../assets/logos/Google.svg" alt="Google"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Amazon.svg" alt="Amazon"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Infosys.svg" alt="Infosys"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/One8.svg" alt="One8"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Cunin.svg" alt="Cunin"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Naturals.svg" alt="Naturals"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Odonil.svg" alt="Odonil"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Tata.svg" alt="Tata"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Flipkart.svg" alt="Flipkart"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Spoyl.svg" alt="Spoyl"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Pastel.svg" alt="Pastel"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Ecoverse.svg" alt="Ecoverse"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── ABOUT / EXPERIENCE / EDUCATION / ACHIEVEMENTS / CERTS ──────
+     PADDING SYSTEM: these rows are pure text/info blocks — switched
+     from .container to .container-text for the wider mobile inset.
+     .bet-img sections between them stay class-less (full-bleed
+     images), unchanged.
+═══════════════════════════════════════════════════════════════ -->
+<section class="about-info">
+    <div class="all-about container-text">
+        <div class="about-label">
+            <h3 class="about-title" data-crop-reveal>Experience</h3>
+        </div>
+        <div class="about-cards">
+            <div class="list-of-mini">
+                <div class="mini-experience" style="align-items: flex-start; padding-top: 0;">
+                    <div class="resp-mini" style="flex-direction: column; gap: 4px;">
+                        <p class="mini-heading" style="width: 100%;" data-crop-reveal>Motion Designer</p>
+                        <p class="mini-category text-info" style="width: 100%;" data-crop-reveal>Landor</p>
+                        <p class="mini-year text-info" style="text-align: left; width: 100%;" data-crop-reveal>Jan 2026 - Present</p>
+                        <p class="mini-year text-info" style="text-align: left; width: 100%;" data-crop-reveal>Mumbai, India • On-site</p>
+                    </div>
+                    <p class="mini-info text-body" data-crop-reveal data-crop-unit="word">As a Motion Design Intern in a lean team, I managed both the 2D and 3D pipelines for lifestyle, sportswear, FMCG, educational, and consultancy brands, transforming static assets into dynamic animated communications. I turned conceptual sketches into realistic environments, developed motion guidelines, and analyzed brand perception to create distinctive motion behaviors. Additionally, I found innovative ways to use AI to beat tight technical deadlines and assisted with high-stakes client pitches while keeping the focus on clear storytelling for the user.</p>
+                </div>
+                <div class="mini-experience" style="align-items: flex-start;">
+                    <div class="resp-mini" style="flex-direction: column; gap: 4px;">
+                        <p class="mini-title" style="width: 100%;" data-crop-reveal>Motion Designer</p>
+                        <p class="mini-category text-info" style="width: 100%;" data-crop-reveal>Lunacal</p>
+                        <p class="mini-year text-info" style="text-align: left; width: 100%;" data-crop-reveal>Jan 2026 - Present</p>
+                        <p class="mini-year text-info" style="text-align: left; width: 100%;" data-crop-reveal>Bengaluru, India • Remote</p>
+                    </div>
+                    <p class="mini-info text-body" data-crop-reveal data-crop-unit="word">As a Motion Graphics Intern at Lunacal, I am responsible for conceptualizing and creating animated visuals that effectively communicate the features and user experience of the company's scheduling and booking platform. My work involves translating complex ideas into clear, engaging motion design content for product launches and marketing.</p>
+                </div>
+                <div class="mini-experience" style="align-items: flex-start;">
+                    <div class="resp-mini" style="flex-direction: column; gap: 4px;">
+                        <p class="mini-title" style="width: 100%;" data-crop-reveal>Brand Designer</p>
+                        <p class="mini-category text-info" style="width: 100%;" data-crop-reveal>Life Transformation Centre</p>
+                        <p class="mini-year text-info" style="text-align: left; width: 100%;" data-crop-reveal>Jan 2025 - Jun 2025</p>
+                        <p class="mini-year text-info" style="text-align: left; width: 100%;" data-crop-reveal>Pune City, India • On-site</p>
+                    </div>
+                    <p class="mini-info text-body" data-crop-reveal data-crop-unit="word">I played a pivotal role navigating my research through the current brands and analyzing current market to draw briefs which furthur led to development and expansion of what the current visual language for LTC. I also ideated and structured a design language direction which further becomes the VL for LTC.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="all-about container-text">
+        <div class="about-label">
+            <h3 class="about-title" data-crop-reveal>Education</h3>
+        </div>
+        <div class="about-cards">
+            <div class="list-of-mini">
+                <div class="mini-experience" style="align-items: flex-start; padding-top: 0;">
+                    <div class="resp-mini" style="flex-direction: column; gap: 4px;">
+                        <p class="mini-title" style="width: 100%;" data-crop-reveal>MIT World Peace University</p>
+                        <p class="mini-category text-info" style="width: 100%;" data-crop-reveal>B.Des, Visual Communications</p>
+                        <p class="mini-year text-info" style="text-align: left; width: 100%;" data-crop-reveal>Grade: 9.18 CGPA</p>
+                    </div>
+                    <p class="mini-info text-body" data-crop-reveal data-crop-unit="word">Over the course of this program, I have developed a deep understanding of visual storytelling, design principles, and advanced 3D pipeline. My educational journey emphasizes the integration of creativity and technology.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bet-img">
+        <img src="../assets/images/16.jpg" alt="Darshan Daiv - Motion Designer">
+    </div>
+
+    <div class="all-about container-text" style="border-top: none;">
+        <div class="about-label">
+            <h3 class="about-title" data-crop-reveal>Achievements</h3>
+        </div>
+        <div class="about-cards">
+            <div class="list-of-mini">
+                <div class="mini-wrapper" style="border-bottom: none;">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>03</span> Selected in Top 100</p>
+                        <p class="mini-category text-info" data-crop-reveal>Samsung Solve for tomorrow</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2026</p>
+                </div>
+                <div class="mini-wrapper">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>01</span> Websites Feature</p>
+                        <p class="mini-category text-info" data-crop-reveal>Wall of Portfolios</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2026</p>
+                </div>
+                <div class="mini-wrapper" style="border-bottom: none;">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>02</span> University Gold Medalist</p>
+                        <p class="mini-category text-info" data-crop-reveal>MIT World Peace University</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2026</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="all-about container-text">
+        <div class="about-label">
+            <h3 class="about-title" data-crop-reveal>Certifications</h3>
+        </div>
+        <div class="about-cards">
+            <div class="list-of-mini">
+                <div class="mini-wrapper">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>01</span> What is the Metaverse?</p>
+                        <p class="mini-category text-info" data-crop-reveal>Meta</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2025</p>
+                </div>
+                <div class="mini-wrapper">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>02</span> Introduction to AI</p>
+                        <p class="mini-category text-info" data-crop-reveal>Google</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2025</p>
+                </div>
+                <div class="mini-wrapper">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>03</span> Front-End Development</p>
+                        <p class="mini-category text-info" data-crop-reveal>Meta</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2025</p>
+                </div>
+                <div class="mini-wrapper">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>04</span> Prompt Engineering Basics</p>
+                        <p class="mini-category text-info" data-crop-reveal>IBM</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2025</p>
+                </div>
+                <div class="mini-wrapper">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>05</span> Programming with JavaScript</p>
+                        <p class="mini-category text-info" data-crop-reveal>Meta</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2025</p>
+                </div>
+                <div class="mini-wrapper">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>06</span> Generative AI Content Creation</p>
+                        <p class="mini-category text-info" data-crop-reveal>Adobe</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2025</p>
+                </div>
+                <div class="mini-wrapper">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>07</span> Innovation Through Design</p>
+                        <p class="mini-category text-info" data-crop-reveal>University of Sydney</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2025</p>
+                </div>
+                <div class="mini-wrapper">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>08</span> Introduction to Virtual Reality</p>
+                        <p class="mini-category text-info" data-crop-reveal>University of London</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2025</p>
+                </div>
+                <div class="mini-wrapper">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>09</span> Introduction to Game Design</p>
+                        <p class="mini-category text-info" data-crop-reveal>Epic Games</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2025</p>
+                </div>
+                <div class="mini-wrapper" style="border-bottom: none;">
+                    <div class="resp-mini">
+                        <p class="mini-title" data-crop-reveal><span>10</span> Unreal Engine Fundamentals</p>
+                        <p class="mini-category text-info" data-crop-reveal>Epic Games</p>
+                    </div>
+                    <p class="mini-year text-info" data-crop-reveal>2025</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bet-img">
+        <img src="../assets/images/3.jpg" alt="Darshan Daiv - Motion Designer">
+    </div>
+</section>
+
+<!-- ─── RESUME DOWNLOAD CTA ─────────────────────────────────────────
+     PADDING SYSTEM: pure text/button content → container-text.
+═══════════════════════════════════════════════════════════════ -->
+<section class="case-next">
+    <div class="container-text" style="text-align:center;padding-top:60px;padding-bottom:60px; align-self: center; justify-self: center;">
+        <a href="../assets/resume/Darshan-Daiv-Resume.pdf" download="DarshanDaiv-Resume.pdf" class="btn btn-ghost mag-target">
+            <span>Download Resume</span>
+            <svg width="20" height="20" viewBox="0 0 215 215" style="transform: rotate(135deg);" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M135.703 60.0437C135.703 61.1045 136.125 62.1219 136.875 62.872L151.579 77.5761C152.329 78.3263 153.347 78.7477 154.407 78.7477L172.792 78.7477C175.001 78.7477 176.792 80.5386 176.792 82.7477V154.747C176.792 156.957 175.001 158.747 172.792 158.747L155.792 158.747C153.583 158.747 151.792 156.957 151.792 154.747L151.792 89.8188C151.792 86.2552 147.484 84.4705 144.964 86.9903L70.9541 161C69.392 162.562 66.8593 162.562 65.2972 161L53.2764 148.979C51.7143 147.417 51.7143 144.884 53.2764 143.322L127.114 69.4847C129.634 66.9648 127.849 62.6562 124.286 62.6563L59.703 62.6568C57.4938 62.6569 55.703 60.866 55.703 58.6568L55.703 41.6568C55.703 39.4476 57.4938 37.6568 59.703 37.6568L131.703 37.6568C133.912 37.6568 135.703 39.4476 135.703 41.6567L135.703 60.0437Z" fill="var(--muted-white)"></path>
+            </svg>
+        </a>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONTACT / FOOTER — .footer-container already uses the padding
+     token directly (see contact.css note below); no class change
+     needed here, but its underlying CSS now points at
+     --page-padding-text since it's pure text/link content.
+═══════════════════════════════════════════════════════════════ -->
+<section id="contact">
+    <div style=" width: 100%; height: 100%; position: absolute; top: 0; left: 0;" data-static-grid></div>
+    <div class="container-text" data-grid-above>
+        <div class="contact-content">
+            <div class="contact-info">
+                <a data-crop-reveal href="mailto:darshandaiv@gmail.com" class="text-subtitle">darshandaiv@gmail.com</a>
+                <a data-crop-reveal href="tel:+919325747315" class="text-subtitle">+91 93257 47315</a>
+            </div>
+            <div class="contact-text">
+                <div class="footer-links">
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+                </div>
+                <div class="footer-links" >
+                    <a data-crop-reveal href="../">Home</a>
+                    <a data-crop-reveal href="../projects/">Projects</a>
+                    <a data-crop-reveal href="../expedition">Expeditions</a>
+                    <a data-crop-reveal href="../playbook">Playbook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ticker" data-ticker data-copy-email="darshandaiv@gmail.com" data-grid-above>
+        <span data-ticker-item>Say Hello, don't be shy.</span>
+    </div>
+    <div class="container-text" data-grid-above>
+        <div class="footer-links">
+            <p class="text-copyright"><span>©</span> Darshan Daiv 2026 • Proudly hand-coded</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════════════════ -->
+<script src="../javascript/script.js"></script>
+<script src="../javascript/about-summary.js"></script>
+<script src="../javascript/scroll-distort.js"></script>
+<script src="../javascript/text-crop-reveal.js"></script>
+<script src="../javascript/logo-ticker.js"></script>
+<script src="../javascript/smooth-scrollbar.js"></script>
+<script src="../javascript/cursor-copy-ticker.js"></script>
+<script src="../javascript/scroll-zoom.js"></script>
+<script src="../javascript/static-grid.js"></script>
+
+</body>
+</html>

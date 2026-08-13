@@ -1,0 +1,148 @@
+/* ============================================================
+   HELLO.CSS — "Say Hello" contact page
+   Used exclusively by hello.html.
+   REQUIRES: root.css loaded first.
+============================================================ */
+
+#hello {
+    padding: 110px 0 100px 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--muted-white);
+}
+
+.hello-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+    width: 100%;
+    height: fit-content;
+}
+
+.vertical-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 var(--page-padding);
+    justify-content: space-around;
+    gap: 48px;
+    width: 100%;
+    height: fit-content;
+}
+
+.hello-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 33.3%;
+    gap: 140px;
+    font-family: var(--bodyFont);
+    color: var(--dark);
+    font-size: clamp(0.7rem, 6vw, 0.9rem);
+    font-weight: 500;
+    letter-spacing: .08em;
+    flex-wrap: wrap;
+}
+
+.shift { margin: 0; } /* Order-swap hook for mobile layout below */
+
+.hello-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.datetime-container {
+    width: 33.3%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--bodyFont);
+    color: var(--dark);
+    font-size: clamp(0.7rem, 6vw, 1.2rem);
+    font-weight: 500;
+    letter-spacing: .08em;
+}
+
+/* Shared link/text styling across every element in this section */
+.hello-container a,
+.hello-info a,
+.hello-content a,
+.hello-info p {
+    font-family: var(--bodyFont);
+    color: var(--dark);
+    font-size: clamp(0.8rem, 6vw, 1rem);
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    transition: 300ms var(--ease-out-expo);
+}
+.hello-info a:hover,
+.hello-content a:hover { font-weight: 600; }
+
+/* ------------------------------------------------------------
+   RESPONSIVE
+------------------------------------------------------------ */
+@media (max-width: 768px) {
+    .vertical-top { flex-direction: column; gap: 32px; }
+    .shift { order: 2; }
+    .hello-info { width: 100%; gap: 48px; }
+    .datetime-container { order: 1; }
+    .hello-content { gap: 36px; }
+}
+
+@media (max-width: 580px) {
+    .hello-content {
+        grid-template-columns: repeat(2, 1fr);
+        place-items: center;
+        gap: 24px;
+    }
+}
+
+/* ============================================================
+   ERROR.CSS — 404 page
+   Used exclusively by 404.html.
+   REQUIRES: root.css loaded first.
+============================================================ */
+
+.error-page {
+    padding: 120px 0 100px 0;
+    width: 100vw;
+    height: 100vh;
+    gap: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark);
+}
+
+/* NOTE: .error-page h1 is defined here but 404.html currently has
+   no <h1> inside .error-page — only a <p data-crop-reveal>. Kept
+   for forward-compatibility in case a heading is added later;
+   remove if you're certain it'll never be used. */
+.error-page h1 {
+    font-family: var(--font);
+    font-size: clamp(3rem, 20vw, 4rem);
+    text-align: center;
+    font-weight: 400;
+    line-height: 100%;
+    color: var(--muted-white);
+}
+
+.error-page p {
+    font-family: var(--bodyFont);
+    font-size: clamp(0.6rem, 3vw, 0.8rem);
+    font-weight: 400;
+    letter-spacing: .08em;
+}

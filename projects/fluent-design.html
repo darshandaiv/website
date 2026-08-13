@@ -1,0 +1,182 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study — Microsoft Fluent Design</title>
+
+    <!-- PATH NOTE: This file lives inside /projects/, one folder
+         level below the site root. Every root-relative asset link
+         below is prefixed with "../" to resolve correctly. -->
+    <link rel="icon" type="image/svg+xml" href="../assets/svg/logo.svg">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+</head>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     REQUIRED VALUE TO KNOW: data-project-slug MUST exactly match a
+     `slug` value inside projects-data.js. This is the ONLY line
+     that changes when duplicating this file for a new project —
+     everything inside <main> is rendered dynamically by
+     renderCaseStudy() in cms-projects.js, based on this slug.
+
+     Currently set to: "fluent-design"
+     → Matches the project with slug: "fluent-design" in
+       projects-data.js (Microsoft Fluent Design)
+═══════════════════════════════════════════════════════════════ -->
+<body data-project-slug="fluent-design"
+      data-distort-fisheye-max-strength="-120"
+      data-distort-fisheye-falloff-start="0.1"
+      data-distort-fisheye-falloff-power="20">
+
+<!-- ─── CUSTOM CURSOR (identical markup on every page) ────────────── -->
+<div class="cursor-dot" id="cursorDot" data-distort-ignore>
+    <svg width="18" height="18" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 0C22.7614 0 25 2.23858 25 5V19.6729C25 22.4343 27.2386 24.6729 30 24.6729H44.7852C47.5466 24.6729 49.7852 26.9114 49.7852 29.6729V44.6729C49.7852 47.4343 47.5466 49.6729 44.7852 49.6729H29.7852C27.0237 49.6729 24.7852 47.4343 24.7852 44.6729V30C24.7852 27.2386 22.5466 25 19.7852 25H5C2.23858 25 0 22.7614 0 20V5C0 2.23858 2.23858 0 5 0H20Z" fill="#ffffff"></path>
+    </svg>
+</div>
+<div class="cursor-ring" id="cursorRing" data-distort-ignore></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════════════════ -->
+<nav id="navbar" data-distort-ignore>
+    <div class="nav-left">
+        <a href="/" class="nav-logo">
+            <dotlottie-wc src="https://lottie.host/7c3f829d-5d73-4b70-8436-db010b175a88/NbOVLTg7fL.lottie" style="width: 40px;height: 40px" autoplay loop></dotlottie-wc>
+        </a>
+    </div>
+    <div class="nav-right">
+        <button class="hamburger" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FULLSCREEN MENU
+     FIX: removed duplicate "class" attribute on every <a>.
+     NOTE: no aria-current here — this page is a case study, not
+     one of the 5 primary nav destinations, so none of the links
+     represent "the current page" in the strict sense.
+═══════════════════════════════════════════════════════════════ -->
+<div class="fs-menu" id="fsMenu" role="dialog" aria-modal="true" aria-label="Site navigation" data-distort-ignore>
+    <div class="ascii-media">
+        <video id="display-video" autoplay muted loop playsinline>
+            <source id="video-source" src="" type="video/mp4">
+        </video>
+    </div>
+    <div class="fs-menu-inner">
+        <ul class="fs-nav-list">
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/"><span class="fs-nav-num">01 </span>Home</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/projects/"><span class="fs-nav-num">02 </span>Projects</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/expedition"><span class="fs-nav-num">03 </span>Expeditions</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/playbook"><span class="fs-nav-num">04 </span>PlayBook</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/hello"><span class="fs-nav-num">05 </span>Say Hello!</a></li>
+        </ul>
+    </div>
+    <div class="fs-menu-footer">
+        <div class="fs-footer-links">
+            <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+        </div>
+        <span class="fs-footer-mail">darshandaiv@gmail.com</span>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CASE STUDY CONTENT — EMPTY SHELL
+     Everything inside <main> is generated dynamically by
+     renderCaseStudy() in cms-projects.js, which:
+       1. Reads data-project-slug from <body> above
+       2. Finds the matching project object in window.PROJECTS
+          (loaded from projects-data.js below)
+       3. Injects hero, meta row, description, and frames HTML
+          straight from that project's fields
+
+     If "Loading case study…" stays on screen, check:
+       - projects-data.js failed to load (script order below), or
+       - the slug on <body> doesn't match any project's `slug`
+         field in projects-data.js (check for typos)
+═══════════════════════════════════════════════════════════════ -->
+<main id="caseRoot">
+    <div class="container" style="padding:180px 0;text-align:center">
+        <p class="text-body">Loading case study…</p>
+    </div>
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONTACT / FOOTER
+═══════════════════════════════════════════════════════════════ -->
+<section id="contact">
+    <div style=" width: 100%; height: 100%; position: absolute; top: 0; left: 0;" data-static-grid></div>
+    <div class="container-text" data-grid-above>
+        <div class="contact-content">
+            <div class="contact-info">
+                <a data-crop-reveal href="mailto:darshandaiv@gmail.com" class="text-subtitle">darshandaiv@gmail.com</a>
+                <a data-crop-reveal href="tel:+919325747315" class="text-subtitle">+91 93257 47315</a>
+            </div>
+            <div class="contact-text">
+                <div class="footer-links">
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+                </div>
+                <div class="footer-links" >
+                    <a data-crop-reveal href="../">Home</a>
+                    <a data-crop-reveal href="../projects/">Projects</a>
+                    <a data-crop-reveal href="../expedition">Expeditions</a>
+                    <a data-crop-reveal href="../playbook">Playbook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ticker" data-ticker data-copy-email="darshandaiv@gmail.com" data-grid-above>
+        <span data-ticker-item>Say Hello, don't be shy.</span>
+    </div>
+    <div class="container-text" data-grid-above>
+        <div class="footer-links">
+            <p class="text-copyright"><span>©</span> Darshan Daiv 2026 • Proudly hand-coded</p>
+        </div>
+    </div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════
+     SCRIPTS
+     Order matters:
+     1. projects-data.js — defines window.PROJECTS (must load first)
+     2. script.js         — defines renderCaseStudy(), initInteractions(),
+                             and all shared page behavior
+     3. cms-projects.js   — actual renderCaseStudy() implementation
+     4. Inline script     — calls renderCaseStudy() once the above
+                             have loaded, using data-project-slug
+
+     REMOVED vs. original: cursor-pixelator.js (retired), and
+     scroll-text.js is KEPT here — this page renders .scroll-reveal-text
+     paragraphs (case-body/case-summary) via renderCaseStudy(), so
+     it's genuinely required on this page (unlike projects/index.html).
+═══════════════════════════════════════════════════════════════ -->
+<script src="../javascript/projects-data.js"></script>
+<script src="../javascript/script.js"></script>
+<script src="../javascript/cms-projects.js"></script>
+<script src="../javascript/scroll-distort.js"></script>
+<script src="../javascript/smooth-scrollbar.js"></script>
+<script src="../javascript/text-crop-reveal.js"></script>
+<script src="../javascript/cursor-copy-ticker.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCaseStudy();
+    });
+</script>
+<script src="../javascript/scroll-text.js"></script>
+<script src="../javascript/scroll-zoom.js"></script>
+<script src="../javascript/static-grid.js"></script>
+
+</body>
+</html>
+

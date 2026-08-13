@@ -1,0 +1,143 @@
+/* ============================================================
+   CASE-STUDY.CSS — Case study page layout
+   Used exclusively by projects/<slug>.html pages, rendered
+   dynamically into #caseRoot by renderCaseStudy() in
+   cms-projects.js. Not used on index.html, projects/index.html,
+   playbook.html, expedition.html, hello.html, or 404.html.
+   REQUIRES: root.css loaded first.
+============================================================ */
+
+/* ------------------------------------------------------------
+   1. NOT FOUND STATE (invalid/missing slug fallback)
+------------------------------------------------------------ */
+.not-found {
+    padding: 0 var(--page-padding);
+    height: 100vh;
+    width: 100%;
+}
+
+/* ------------------------------------------------------------
+   2. CASE HERO — title, meta row, hero image
+------------------------------------------------------------ */
+.case-hero { padding: 150px 0 0; }
+
+.case-hero-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 36px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+}
+
+/* .case-title styling now sourced from .text-title preset in
+   root.css (aliased selector) — only the case-study-specific
+   word-spacing override remains here. */
+.case-title { word-spacing: .15em; }
+
+.case-meta-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 48px 0;
+    border-top: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+.case-meta-item .ci-label { margin-bottom: 8px; }
+
+/* .ci-label sourced from .text-eyebrow preset alias in root.css */
+.ci-value {
+    font-size: clamp(1.1rem, 7vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -.03em;
+}
+
+.case-hero-image {
+    width: 100%;
+    max-height: 640px;
+    overflow: hidden;
+}
+.case-hero-image img {
+    width: 100%;
+    height: 100%;
+    max-height: 640px;
+    object-fit: cover;
+}
+
+/* ------------------------------------------------------------
+   3. CASE BODY (description paragraph)
+------------------------------------------------------------ */
+.case-body { padding: 70px 0 20px; }
+/* .bold-text sourced from .text-subtitle preset alias in root.css */
+
+/* ------------------------------------------------------------
+   4. STACKED MEDIA FRAMES
+------------------------------------------------------------ */
+.case-frames { padding: 40px 0 20px; }
+
+.case-frame {
+    margin-bottom: 18px;
+    border-radius: var(--br-small);
+    overflow: hidden;
+}
+.case-frame-media {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Split frame — 2 images side by side (frame.type === "split") */
+.case-frame-split {
+    display: flex;
+    gap: 18px;
+    border: none;
+    background: none;
+    overflow: visible;
+}
+.case-frame-split-item {
+    flex: 1 1 50%;
+    min-width: 0;
+    border-radius: var(--br-small);
+    overflow: hidden;
+}
+.case-frame-split-item .case-frame-media {
+    aspect-ratio: 6 / 7;
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* ------------------------------------------------------------
+   5. SUMMARY SECTION (optional, project.summary field)
+------------------------------------------------------------ */
+.case-summary {
+    padding: 80px 0 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+}
+.case-summary .section-eyebrow { margin-bottom: 18px; }
+
+/* ------------------------------------------------------------
+   6. "BACK TO ALL PROJECTS" CTA
+------------------------------------------------------------ */
+.case-next .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ------------------------------------------------------------
+   RESPONSIVE
+------------------------------------------------------------ */
+@media (max-width: 768px) {
+    .case-hero { padding: 130px 0 0; }
+    .case-hero-top { flex-direction: column; align-items: flex-start; }
+    .case-meta-row { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+    .case-frame { margin-bottom: 12px; }
+
+    .case-frame-split { flex-direction: column; gap: 12px; }
+    .case-frame-split-item { flex: 1 1 100%; }
+    .case-frame-split-item .case-frame-media { height: auto; max-height: none; }
+}

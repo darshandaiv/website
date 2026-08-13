@@ -1,0 +1,282 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Darshan Daiv</title>
+
+    <link rel="icon" type="image/svg+xml" href="../assets/svg/logo.svg">
+
+    <!-- FIX: was "css/style.css" (missing ../), broke stylesheet loading on this page -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+</head>
+<body>
+
+    <!-- Full-Screen Liquid Background Overlay -->
+<canvas id="fluid-canvas"></canvas>
+
+  <!-- LOADER OVERLAY -->
+  <div id="loader-wrapper" data-distort-ignore="" data-distort-fixed="">
+    <div class="loader-panel left"></div>
+    <div class="loader-panel right"></div>
+    
+    <div class="loader-content">
+      <div class="loader-percentage" id="loader-percent">0%</div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="loader-bar"></div>
+      </div>
+      <div class="loader-message" id="loader-msg">Initializing Resources...</div>
+    </div>
+  </div>
+
+<!-- ─── CUSTOM CURSOR ────────────────────────────────────────────── -->
+<div class="cursor-dot" id="cursorDot" data-distort-ignore="">
+    <svg width="18" height="18" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 0C22.7614 0 25 2.23858 25 5V19.6729C25 22.4343 27.2386 24.6729 30 24.6729H44.7852C47.5466 24.6729 49.7852 26.9114 49.7852 29.6729V44.6729C49.7852 47.4343 47.5466 49.6729 44.7852 49.6729H29.7852C27.0237 49.6729 24.7852 47.4343 24.7852 44.6729V30C24.7852 27.2386 22.5466 25 19.7852 25H5C2.23858 25 0 22.7614 0 20V5C0 2.23858 2.23858 0 5 0H20Z" fill="#ffffff"></path>
+    </svg>
+</div>
+<div class="cursor-ring" id="cursorRing" data-distort-ignore=""></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVBAR
+     NOTE: "Available for work" badge (.nav-avail) intentionally
+     omitted here to match its commented-out state on every other
+     page except 404.html. Uncomment across all pages if you want
+     it live sitewide instead — flagged during review, your call.
+═══════════════════════════════════════════════════════════════ -->
+<nav id="navbar" data-distort-ignore="">
+    <div class="nav-left">
+        <a href="/" class="nav-logo">
+            <dotlottie-wc src="https://lottie.host/7c3f829d-5d73-4b70-8436-db010b175a88/NbOVLTg7fL.lottie" style="width: 40px;height: 40px" autoplay="" loop=""></dotlottie-wc>
+        </a>
+    </div>
+    <div class="nav-right">
+        <button class="hamburger" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FULLSCREEN MENU
+     FIX: removed duplicate "class" attribute (was written twice on
+     every <a>, second copy was dead/ignored by the browser).
+     FIX: current-page link uses aria-current="page" instead of a
+     dead href="#" — screen readers announce it correctly and the
+     link still visually behaves the same via CSS if needed.
+═══════════════════════════════════════════════════════════════ -->
+<div class="fs-menu" id="fsMenu" role="dialog" aria-modal="true" aria-label="Site navigation" data-distort-ignore="">
+    <div class="ascii-media">
+        <video id="display-video" autoplay="" muted="" loop="" playsinline="">
+            <source id="video-source" src="" type="video/mp4">
+        </video>
+    </div>
+    <div class="fs-menu-inner">
+        <ul class="fs-nav-list">
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/" aria-current="page"><span class="fs-nav-num">01 </span>Home</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/projects/"><span class="fs-nav-num">02 </span>Projects</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/expedition"><span class="fs-nav-num">03 </span>Expeditions</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/playbook"><span class="fs-nav-num">04 </span>PlayBook</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/hello"><span class="fs-nav-num">05 </span>Say Hello!</a></li>
+        </ul>
+    </div>
+    <div class="fs-menu-footer">
+        <div class="fs-footer-links">
+            <!-- FIX: added rel="noopener noreferrer" to every target="_blank" link (reverse-tabnabbing security gap) -->
+            <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+        </div>
+        <span class="fs-footer-mail">darshandaiv@gmail.com</span>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════════════ -->
+<section id="hero" data-distort-sticky-track="">
+    <div id="scene-container" data-distort-sticky-top="">
+        <canvas id="scene"></canvas>
+        <div class="comment-split" data-distort-ignore="">
+            <span class="hero-label" style="text-align: center;" data-crop-reveal data-crop-delay="2600">Scroll Down</span>
+            <div class="hero-comment">
+                <span class="hero-label" data-crop-reveal data-crop-delay="2800">
+                    [01] Click - to Say Hi!
+                </span>
+                <span class="hero-label" data-crop-reveal data-crop-delay="2900">
+                    [02] Move mouse - to Explore possibilities
+                </span>
+                <span class="hero-label" data-crop-reveal data-crop-delay="3000">
+                    [03] Drag - to Inspect me
+                </span>
+            </div>
+        </div>
+        
+        <div class="hero-intro" data-distort-ignore="">
+            <span class="hero-title" style="text-align: center; padding: 100px 0;">
+                Hi, I'm Darshan Daiv
+            </span>
+        </div>
+
+        <div class="hero-intro2" data-distort-ignore="">
+            <span class="hero-title" style="text-align: center; padding: 100px 0;">
+                Motion Designer &<br>Creative Technologist.
+            </span>
+        </div>
+
+        <div class="hero-intro3" data-distort-ignore="">
+            <span class="hero-title" style="text-align: center; padding: 100px 0;">
+                At the Forefront of<br>Design & Technology.
+            </span>
+        </div>
+    </div>
+</section>
+<div class="hero-mobile" data-distort-ignore="">
+    <span class="mobile-title" data-crop-reveal data-crop-delay="3000">Hi, I'm Darshan Daiv,<br>Motion Designer &<br>Creative Technologist.</span>
+    <span class="hero-label" style="text-align: center;" data-crop-reveal data-crop-delay="3000">Tap to Say Hi!</span>
+</div>
+
+
+<!-- ─── LOGO TICKER ────────────────────────────────────── -->
+
+<section class="logo-ticker-section">
+    <div class="logo-ticker-wrap">
+        <div class="logo-ticker-track">
+            <div class="logo-ticker-item"><img src="../assets/logos/Google.svg" alt="Google"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Amazon.svg" alt="Amazon"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Infosys.svg" alt="Infosys"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/One8.svg" alt="One8"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Cunin.svg" alt="Cunin"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Naturals.svg" alt="Naturals"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Odonil.svg" alt="Odonil"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Tata.svg" alt="Tata"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Flipkart.svg" alt="Flipkart"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Spoyl.svg" alt="Spoyl"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Pastel.svg" alt="Pastel"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Ecoverse.svg" alt="Ecoverse"></div>
+
+            <div class="logo-ticker-item"><img src="../assets/logos/Google.svg" alt="Google"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Amazon.svg" alt="Amazon"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Infosys.svg" alt="Infosys"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/One8.svg" alt="One8"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Cunin.svg" alt="Cunin"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Naturals.svg" alt="Naturals"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Odonil.svg" alt="Odonil"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Tata.svg" alt="Tata"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Flipkart.svg" alt="Flipkart"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Spoyl.svg" alt="Spoyl"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Pastel.svg" alt="Pastel"></div>
+            <div class="logo-ticker-item"><img src="../assets/logos/Ecoverse.svg" alt="Ecoverse"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── WORK (rendered dynamically by cms-projects.js) ───────────── -->
+<section id="work">
+    <div class="section-header container reveal visible" style="margin-bottom:56px">
+        <div>
+            <p data-crop-reveal="" class="text-eyebrow">Best of my work</p>
+            <h2 data-crop-reveal="" class="text-title">Projects</h2>
+        </div>
+        <a href="../projects/" class="btn-ghost mag-target">
+            <span class="btn-span"><span data-crop-reveal="">All projects &nbsp;</span></span>
+            <svg width="20" height="20" viewBox="0 0 215 215" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M135.703 60.0437C135.703 61.1045 136.125 62.1219 136.875 62.872L151.579 77.5761C152.329 78.3263 153.347 78.7477 154.407 78.7477L172.792 78.7477C175.001 78.7477 176.792 80.5386 176.792 82.7477V154.747C176.792 156.957 175.001 158.747 172.792 158.747L155.792 158.747C153.583 158.747 151.792 156.957 151.792 154.747L151.792 89.8188C151.792 86.2552 147.484 84.4705 144.964 86.9903L70.9541 161C69.392 162.562 66.8593 162.562 65.2972 161L53.2764 148.979C51.7143 147.417 51.7143 144.884 53.2764 143.322L127.114 69.4847C129.634 66.9648 127.849 62.6562 124.286 62.6563L59.703 62.6568C57.4938 62.6569 55.703 60.866 55.703 58.6568L55.703 41.6568C55.703 39.4476 57.4938 37.6568 59.703 37.6568L131.703 37.6568C133.912 37.6568 135.703 39.4476 135.703 41.6567L135.703 60.0437Z" fill="var(--muted-white)"></path>
+            </svg>
+        </a>
+    </div>
+    <div class="all-projects-grid container" id="workGrid"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONTACT / FOOTER
+═══════════════════════════════════════════════════════════════ -->
+<section id="contact">
+    <div style=" width: 100%; height: 100%; position: absolute; top: 0; left: 0;" data-static-grid></div>
+    <div class="container-text" data-grid-above>
+        <div class="contact-content">
+            <div class="contact-info">
+                <a data-crop-reveal href="mailto:darshandaiv@gmail.com" class="text-subtitle">darshandaiv@gmail.com</a>
+                <a data-crop-reveal href="tel:+919325747315" class="text-subtitle">+91 93257 47315</a>
+            </div>
+            <div class="contact-text">
+                <div class="footer-links">
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+                </div>
+                <div class="footer-links" >
+                    <a data-crop-reveal href="../">Home</a>
+                    <a data-crop-reveal href="../projects/">Projects</a>
+                    <a data-crop-reveal href="../expedition">Expeditions</a>
+                    <a data-crop-reveal href="../playbook">Playbook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ticker" data-ticker data-copy-email="darshandaiv@gmail.com" data-grid-above>
+        <span data-ticker-item>Say Hello, don't be shy.</span>
+    </div>
+    <div class="container-text" data-grid-above>
+        <div class="footer-links">
+            <p class="text-copyright"><span>©</span> Darshan Daiv 2026 • Proudly hand-coded</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCRIPTS — order matters:
+     1. script.js first  — exposes window.initInteractions() and
+        window.initTextTicker(), used by everything after it.
+     2. projects-data.js — defines window.PROJECTS (CMS data source).
+     3. cms-projects.js  — reads window.PROJECTS, renders #workGrid.
+     4. scroll-distort.js, logo-ticker.js, text-crop-reveal.js,
+        smooth-scrollbar.js — independent visual effect modules.
+
+     REMOVED vs. original: cursor-pixelator.js (effect retired —
+     placeholder below for its replacement).
+═══════════════════════════════════════════════════════════════ -->
+
+<script src="../javascript/loader.js"></script>
+  <!-- Three.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+<!-- Shaders (must load before postprocessing) -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+
+<!-- Postprocessing -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/FXAAShader.js"></script>
+<script src="../javascript/app.js"></script>
+
+<script src="../javascript/script.js"></script>
+<script src="../javascript/projects-data.js"></script>
+<script src="../javascript/cms-projects.js"></script>
+<script src="../javascript/scroll-distort.js"></script>
+<script src="../javascript/logo-ticker.js"></script>
+<script src="../javascript/text-crop-reveal.js"></script>
+<script src="../javascript/smooth-scrollbar.js"></script>
+<script src="../javascript/cursor-copy-ticker.js"></script>
+<!-- CURSOR EFFECT: placeholder for future custom cursor interaction (cursor-pixelator.js retired) -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        renderWorkSection();
+    });
+</script>
+<script src="../javascript/scroll-zoom.js"></script>
+<script src="../javascript/dotgrid.js"></script>
+<script src="../javascript/static-grid.js"></script>
+<script src="../javascript/loader.js"></script>
+
+</body></html>

@@ -1,0 +1,37 @@
+/* ============================================================
+   ERROR.CSS — 404 page
+   Used exclusively by 404.html.
+   REQUIRES: root.css loaded first.
+============================================================ */
+
+.error-page {
+    padding: 110px 0 100px 0;
+    width: 100vw;
+    height: 100vh;
+    gap: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark);
+}
+
+/* NOTE: .error-page h1 is defined here but 404.html currently has
+   no <h1> inside .error-page — only a <p data-crop-reveal>. Kept
+   for forward-compatibility in case a heading is added later;
+   remove if you're certain it'll never be used. */
+.error-page h1 {
+    font-family: var(--font);
+    font-size: clamp(3rem, 20vw, 4rem);
+    text-align: center;
+    font-weight: 400;
+    line-height: 100%;
+    color: var(--muted-white);
+}
+
+.error-page p {
+    font-family: var(--bodyFont);
+    font-size: clamp(0.6rem, 3vw, 0.8rem);
+    font-weight: 400;
+    letter-spacing: .08em;
+}

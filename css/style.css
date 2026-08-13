@@ -1,0 +1,37 @@
+/* ============================================================
+   STYLE.CSS — Master entry point
+   This is the ONLY file linked directly in every HTML <head>.
+   Do not add component rules here — this file's sole purpose
+   is to assemble the split stylesheets below, in order.
+
+   LOAD ORDER MATTERS:
+   1. root.css        — tokens, padding system, typography
+                         presets, reset, cursor, nav, buttons,
+                         footer. Everything below depends on
+                         the custom properties defined here.
+   2. components.css   — work-card, logo-ticker, filter-pills,
+                         chips. Used on index.html + projects/.
+   3. case-study.css   — case-hero/meta/frames/summary. Used
+                         only on projects/<slug>.html pages.
+   4. playbook.css      — alternating media/text stack. Used
+                         only on playbook.html.
+   5. expedition.css    — about/experience blocks + interactive
+                         showcase. Used only on expedition.html.
+   6. hello.css         — "Say Hello" contact page layout.
+   7. error.css         — 404 page layout.
+
+   PERFORMANCE NOTE: @import creates a small sequential loading
+   chain (browser must fetch style.css, then discover and fetch
+   each imported file). For a site this size that's negligible,
+   but if you ever add a build step (Vite/Webpack/etc), switch
+   this to concatenating the 6 files into one bundle at build
+   time instead of using @import at runtime.
+============================================================ */
+
+@import url('root.css');
+@import url('components.css');
+@import url('case-study.css');
+@import url('playbook.css');
+@import url('expedition.css');
+@import url('hello.css');
+@import url('error.css');

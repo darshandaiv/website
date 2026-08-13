@@ -1,0 +1,157 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/svg/logo.svg">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+</head>
+<body>
+
+<!-- ─── CUSTOM CURSOR ────────────────────────────────────────────── -->
+<div class="cursor-dot" id="cursorDot" data-distort-ignore>
+    <svg width="18" height="18" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 0C22.7614 0 25 2.23858 25 5V19.6729C25 22.4343 27.2386 24.6729 30 24.6729H44.7852C47.5466 24.6729 49.7852 26.9114 49.7852 29.6729V44.6729C49.7852 47.4343 47.5466 49.6729 44.7852 49.6729H29.7852C27.0237 49.6729 24.7852 47.4343 24.7852 44.6729V30C24.7852 27.2386 22.5466 25 19.7852 25H5C2.23858 25 0 22.7614 0 20V5C0 2.23858 2.23858 0 5 0H20Z" fill="#ffffff"></path>
+    </svg>
+</div>
+<div class="cursor-ring" id="cursorRing" data-distort-ignore></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════════════════ -->
+<nav id="navbar" data-distort-ignore>
+    <div class="nav-left">
+        <a href="/" class="nav-logo">
+            <dotlottie-wc src="https://lottie.host/7c3f829d-5d73-4b70-8436-db010b175a88/NbOVLTg7fL.lottie" style="width: 40px;height: 40px" autoplay loop></dotlottie-wc>
+        </a>
+    </div>
+    <div class="nav-right">
+        <button class="hamburger" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+<!-- ═══════════════════════════════════════════════════════════════
+     FULLSCREEN MENU
+     FIX: removed duplicate "class" attribute on every <a>.
+     FIX: current-page link (Projects) uses aria-current="page".
+═══════════════════════════════════════════════════════════════ -->
+<div class="fs-menu" id="fsMenu" role="dialog" aria-modal="true" aria-label="Site navigation" data-distort-ignore>
+    <div class="ascii-media">
+        <video id="display-video" autoplay muted loop playsinline>
+            <source id="video-source" src="" type="video/mp4">
+        </video>
+    </div>
+    <div class="fs-menu-inner">
+        <ul class="fs-nav-list">
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/"><span class="fs-nav-num">01 </span>Home</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/projects/" aria-current="page"><span class="fs-nav-num">02 </span>Projects</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/expedition"><span class="fs-nav-num">03 </span>Expeditions</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/playbook"><span class="fs-nav-num">04 </span>PlayBook</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/hello"><span class="fs-nav-num">05 </span>Say Hello!</a></li>
+        </ul>
+    </div>
+    <div class="fs-menu-footer">
+        <div class="fs-footer-links">
+            <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+        </div>
+        <span class="fs-footer-mail">darshandaiv@gmail.com</span>
+    </div>
+</div>
+
+<!-- ─── ALL PROJECTS GRID + FILTERS (rendered by cms-projects.js) ─── -->
+<section id="all-projects" style="padding:150px 0 120px">
+    <div class="container-text">
+        <div class="section-header reveal visible">
+            <div>
+                <p data-crop-reveal class="text-eyebrow">Every project, one place</p>
+                <h2 data-crop-reveal class="text-title" style="margin-bottom: 14px">All Projects</h2>
+            </div>
+        </div>
+        <div class="filter-row reveal delay-1 visible">
+            <button class="filter-pill active" data-filter="All" data-crop-reveal>All</button>
+            <button class="filter-pill" data-filter="Interaction" data-crop-reveal>Interaction</button>
+            <button class="filter-pill" data-filter="Motion" data-crop-reveal>Motion</button>
+            <button class="filter-pill" data-filter="3D Graphics" data-crop-reveal>3D Graphics</button>
+            <button class="filter-pill" data-filter="Branding" data-crop-reveal>Branding</button>
+            <button class="filter-pill" data-filter="Packaging" data-crop-reveal>Packaging</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="all-projects-grid" id="allProjectsGrid">
+            <!-- Rendered dynamically by cms-projects.js -->
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONTACT / FOOTER
+═══════════════════════════════════════════════════════════════ -->
+<section id="contact">
+    <div style=" width: 100%; height: 100%; position: absolute; top: 0; left: 0;" data-static-grid></div>
+    <div class="container-text" data-grid-above>
+        <div class="contact-content">
+            <div class="contact-info">
+                <a data-crop-reveal href="mailto:darshandaiv@gmail.com" class="text-subtitle">darshandaiv@gmail.com</a>
+                <a data-crop-reveal href="tel:+919325747315" class="text-subtitle">+91 93257 47315</a>
+            </div>
+            <div class="contact-text">
+                <div class="footer-links">
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+                </div>
+                <div class="footer-links" >
+                    <a data-crop-reveal href="../">Home</a>
+                    <a data-crop-reveal href="../projects/">Projects</a>
+                    <a data-crop-reveal href="../expedition">Expeditions</a>
+                    <a data-crop-reveal href="../playbook">Playbook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ticker" data-ticker data-copy-email="darshandaiv@gmail.com" data-grid-above>
+        <span data-ticker-item>Say Hello, don't be shy.</span>
+    </div>
+    <div class="container-text" data-grid-above>
+        <div class="footer-links">
+            <p class="text-copyright"><span>©</span> Darshan Daiv 2026 • Proudly hand-coded</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCRIPTS
+     REMOVED vs. original: cursor-pixelator.js (retired).
+     KEPT: scroll-text.js — powers .scroll-reveal-text, used on
+     case-study pages linked from this grid (not on this page
+     directly, but harmless/small to preload here since users
+     navigate from this grid into case studies constantly).
+═══════════════════════════════════════════════════════════════ -->
+<script src="../javascript/projects-data.js"></script>
+<script src="../javascript/script.js"></script>
+<script src="../javascript/cms-projects.js"></script>
+<script src="../javascript/scroll-distort.js"></script>
+<script src="../javascript/text-crop-reveal.js"></script>
+<script src="../javascript/smooth-scrollbar.js"></script>
+<script src="../javascript/cursor-copy-ticker.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        renderProjectsGrid('All');
+        initProjectsFilters();
+    });
+</script>
+<script src="../javascript/scroll-zoom.js"></script>
+<script src="../javascript/static-grid.js"></script>
+
+</body>
+</html>

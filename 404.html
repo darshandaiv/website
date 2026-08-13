@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Darshan Daiv</title>
+
+    <link rel="icon" type="image/svg+xml" href="../assets/svg/logo.svg">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+</head>
+<body>
+
+<!-- ─── CUSTOM CURSOR ────────────────────────────────────────────── -->
+<div class="cursor-dot" id="cursorDot" data-distort-ignore>
+    <svg width="18" height="18" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 0C22.7614 0 25 2.23858 25 5V19.6729C25 22.4343 27.2386 24.6729 30 24.6729H44.7852C47.5466 24.6729 49.7852 26.9114 49.7852 29.6729V44.6729C49.7852 47.4343 47.5466 49.6729 44.7852 49.6729H29.7852C27.0237 49.6729 24.7852 47.4343 24.7852 44.6729V30C24.7852 27.2386 22.5466 25 19.7852 25H5C2.23858 25 0 22.7614 0 20V5C0 2.23858 2.23858 0 5 0H20Z" fill="#ffffff"></path>
+    </svg>
+</div>
+<div class="cursor-ring" id="cursorRing" data-distort-ignore></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVBAR
+     NOTE: .nav-avail ("Available for work") is LIVE here, unlike
+     every other page where it's commented out. Kept as-is since
+     this was the original's only live instance — flagged earlier
+     for your decision on whether to standardize sitewide. No
+     change made without your confirmation.
+═══════════════════════════════════════════════════════════════ -->
+<nav id="navbar" data-distort-ignore>
+    <div class="nav-left">
+        <a href="/" class="nav-logo">
+            <dotlottie-wc src="https://lottie.host/7c3f829d-5d73-4b70-8436-db010b175a88/NbOVLTg7fL.lottie" style="width: 40px;height: 40px" autoplay loop></dotlottie-wc>
+        </a>
+    </div>
+    <div class="nav-right">
+        <!-- <div class="nav-avail">
+            <span class="avail-dot"></span>
+            Available for work
+        </div> -->
+        <button class="hamburger" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FULLSCREEN MENU
+     FIX: removed duplicate "class" attribute on every <a>.
+═══════════════════════════════════════════════════════════════ -->
+<div class="fs-menu" id="fsMenu" role="dialog" aria-modal="true" aria-label="Site navigation" data-distort-ignore>
+    <div class="ascii-media">
+        <video id="display-video" autoplay muted loop playsinline>
+            <source id="video-source" src="" type="video/mp4">
+        </video>
+    </div>
+    <div class="fs-menu-inner">
+        <ul class="fs-nav-list">
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/"><span class="fs-nav-num">01 </span>Home</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/projects/"><span class="fs-nav-num">02 </span>Projects</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/expedition"><span class="fs-nav-num">03 </span>Expeditions</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/playbook"><span class="fs-nav-num">04 </span>PlayBook</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/hello"><span class="fs-nav-num">05 </span>Say Hello!</a></li>
+        </ul>
+    </div>
+    <div class="fs-menu-footer">
+        <div class="fs-footer-links">
+            <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+        </div>
+        <span class="fs-footer-mail">darshandaiv@gmail.com</span>
+    </div>
+</div>
+
+<!-- ─── 404 CONTENT ───────────────────────────────────────────────── -->
+<div class="error-page" data-static-grid data-grid-opacity="0.15">
+    <div class="hello-info">
+        <p class="text-body" style="color: var(--muted-white); width: 100%; text-align: center; font-size: clamp(0.8rem, 6vw, 1rem);" data-crop-reveal>Even I dunno where this link is!</p>
+    </div>
+
+    <div class="ticker" data-ticker
+        style="padding-bottom: 28px;"
+        data-ticker-mode="button"
+        data-ticker-text="GO TO HOME • GO TO HOME • GO TO HOME • "
+        data-ticker-href="/">
+        <span data-ticker-item style="color: var(--text-muted);">Oops! 404.&nbsp;</span>
+    </div>
+
+    <div class="hello-content">
+        <a data-crop-reveal class="mag-target" style="color: var(--muted-white);" data-mag-strength="2" data-mag-speed="0.4" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+        <a data-crop-reveal class="mag-target" style="color: var(--muted-white);" data-mag-strength="2" data-mag-speed="0.4" target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+        <a data-crop-reveal class="mag-target" style="color: var(--muted-white);" data-mag-strength="2" data-mag-speed="0.4" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+        <a data-crop-reveal class="mag-target" style="color: var(--muted-white);" data-mag-strength="2" data-mag-speed="0.4" target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+    </div>
+</div>
+<div class="container-text" style="position: absolute; bottom: 0; width: 100%;">
+    <div class="footer-links">
+        <p class="text-copyright"><span>©</span> Darshan Daiv 2026 • Proudly hand-coded</p>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCRIPTS
+     REMOVED vs. original: cursor-pixelator.js (retired). Also
+     removed the renderWorkSection() call + its <script> block —
+     this page has no #workGrid element, so the call was a dead
+     no-op (same issue flagged on playbook.html/expedition.html).
+═══════════════════════════════════════════════════════════════ -->
+<script src="../javascript/script.js"></script>
+<script src="../javascript/scroll-distort.js"></script>
+<script src="../javascript/smooth-scrollbar.js"></script>
+<script src="../javascript/text-crop-reveal.js"></script>
+<script src="../javascript/cursor-copy-ticker.js"></script>
+<script src="../javascript/scroll-zoom.js"></script>
+<script src="../javascript/static-grid.js"></script>
+
+</body>
+</html>

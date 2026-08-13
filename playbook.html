@@ -1,0 +1,307 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook</title>
+
+    <link rel="icon" type="image/svg+xml" href="../assets/svg/logo.svg">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+</head>
+<body>
+
+<!-- ─── CUSTOM CURSOR ────────────────────────────────────────────── -->
+<div class="cursor-dot" id="cursorDot" data-distort-ignore>
+    <svg width="18" height="18" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 0C22.7614 0 25 2.23858 25 5V19.6729C25 22.4343 27.2386 24.6729 30 24.6729H44.7852C47.5466 24.6729 49.7852 26.9114 49.7852 29.6729V44.6729C49.7852 47.4343 47.5466 49.6729 44.7852 49.6729H29.7852C27.0237 49.6729 24.7852 47.4343 24.7852 44.6729V30C24.7852 27.2386 22.5466 25 19.7852 25H5C2.23858 25 0 22.7614 0 20V5C0 2.23858 2.23858 0 5 0H20Z" fill="#ffffff"></path>
+    </svg>
+</div>
+<div class="cursor-ring" id="cursorRing" data-distort-ignore></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════════════════ -->
+<nav id="navbar" data-distort-ignore>
+    <div class="nav-left">
+        <a href="/" class="nav-logo">
+            <dotlottie-wc src="https://lottie.host/7c3f829d-5d73-4b70-8436-db010b175a88/NbOVLTg7fL.lottie" style="width: 40px;height: 40px" autoplay loop></dotlottie-wc>
+        </a>
+    </div>
+    <div class="nav-right">
+        <button class="hamburger" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FULLSCREEN MENU
+═══════════════════════════════════════════════════════════════ -->
+<div class="fs-menu" id="fsMenu" role="dialog" aria-modal="true" aria-label="Site navigation" data-distort-ignore>
+    <div class="ascii-media">
+        <video id="display-video" autoplay muted loop playsinline>
+            <source id="video-source" src="" type="video/mp4">
+        </video>
+    </div>
+    <div class="fs-menu-inner">
+        <ul class="fs-nav-list">
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/"><span class="fs-nav-num">01 </span>Home</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/projects/"><span class="fs-nav-num">02 </span>Projects</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/expedition"><span class="fs-nav-num">03 </span>Expeditions</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/playbook" aria-current="page"><span class="fs-nav-num">04 </span>PlayBook</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/hello"><span class="fs-nav-num">05 </span>Say Hello!</a></li>
+        </ul>
+    </div>
+    <div class="fs-menu-footer">
+        <div class="fs-footer-links">
+            <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+        </div>
+        <span class="fs-footer-mail">darshandaiv@gmail.com</span>
+    </div>
+</div>
+
+<!-- ─── PLAYBOOK — alternating media/text stack ──────────────────────
+     PADDING SYSTEM: NO container class on the outer wrapper — it's
+     purely a layout/grouping div. Padding is applied ONLY at the
+     leaf level: .playbook-text gets .container-text, .playbook-media
+     gets none (full viewing area). This avoids double-nesting insets.
+═══════════════════════════════════════════════════════════════ -->
+<section id="playbook" style="padding:150px 0 120px">
+
+    <div class="section-header container-text">
+        <div>
+            <p data-crop-reveal class="text-eyebrow">Find my experimental work</p>
+            <h2 data-crop-reveal class="text-title" style="margin-bottom: 100px">Playbook</h2>
+        </div>
+    </div>
+
+    <div class="playbook-wrap">
+
+        <div class="playbook-content" style="align-self: flex-start;">
+            <div class="container">
+                <div class="playbook-media video-wrap">
+                    <video  class="playbook-image modern-video" playsinline preload="metadata" muted>
+                        <source src="../assets/videos/waves.mp4" type="video/mp4">
+                    </video>
+                    <button class="video-play-overlay" aria-label="Play video">
+                        <svg class="icon-play" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7L8 5z" fill="currentColor"/></svg>
+                        <svg class="icon-pause" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z" fill="currentColor"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="playbook-text container-text">
+                <h2 data-crop-reveal class="text-heading">Media Pipe</h2>
+                <p data-crop-reveal class="section-description">The Playbook is a collection of my thoughts, ideas, and experiments. It is a place where I can share my work and my process with the world.</p>
+            </div>
+        </div>
+
+        <div class="playbook-content" style="align-self: center;">
+            <div class="playbook-text container-text">
+                <h2 data-crop-reveal class="text-heading">Playbook</h2>
+                <p data-crop-reveal class="section-description">The Playbook is a collection of my thoughts, ideas, and experiments. It is a place where I can share my work and my process with the world.</p>
+            </div>
+            <div class="container">
+                <div class="playbook-media video-wrap">
+                    <video  class="playbook-image modern-video" playsinline preload="metadata" muted>
+                        <source src="../assets/playbook/Touch-designer-1.mp4" type="video/mp4">
+                    </video>
+                    <button class="video-play-overlay" aria-label="Play video">
+                        <svg class="icon-play" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7L8 5z" fill="currentColor"/></svg>
+                        <svg class="icon-pause" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z" fill="currentColor"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="playbook-content" style="align-self: flex-end;">
+            <div class="container">
+                <div class="playbook-media">
+                    <img  src="../assets/playbook/Screenshot 2026-06-19 172539.png" alt="Playbook — The star gaze" class="playbook-image">
+                </div>
+            </div>
+            <div class="playbook-text container-text">
+                <h2 data-crop-reveal class="text-heading">The star gaze</h2>
+                <p data-crop-reveal class="section-description">The Playbook is a collection of my thoughts, ideas, and experiments. It is a place where I can share my work and my process with the world.</p>
+            </div>
+        </div>
+
+        <div class="playbook-content" style="align-self: center;">
+            <div class="container">
+                <div class="playbook-media">
+                    <img  src="../assets/playbook/blue-metal-3840x2160-17258.jpg" alt="Playbook — Media Pipe" class="playbook-image">
+                </div>
+            </div>
+            <div class="playbook-text container-text">
+                <h2 data-crop-reveal class="text-heading">Media Pipe</h2>
+                <p data-crop-reveal class="section-description">The Playbook is a collection of my thoughts, ideas, and experiments. It is a place where I can share my work and my process with the world.</p>
+            </div>
+        </div>
+
+        <div class="playbook-content" style="align-self: flex-start;">
+            <div class="playbook-text container-text">
+                <h2 data-crop-reveal class="text-heading">Playbook</h2>
+                <p data-crop-reveal class="section-description">The Playbook is a collection of my thoughts, ideas, and experiments. It is a place where I can share my work and my process with the world.</p>
+            </div>
+            <div class="container">
+                <div class="playbook-media">
+                    <img  src="../assets/playbook/apple-macbook.jpg" alt="Playbook" class="playbook-image">
+                </div>
+            </div>
+        </div>
+
+        <div class="playbook-content" style="align-self: flex-end;">
+            <div class="container">
+                <div class="playbook-media">
+                    <img  src="../assets/playbook/Screenshot 2026-06-19 172539.png" alt="Playbook — The star gaze" class="playbook-image">
+                </div>
+            </div>
+            <div class="playbook-text container-text">
+                <h2 data-crop-reveal class="text-heading">The star gaze</h2>
+                <p data-crop-reveal class="section-description">The Playbook is a collection of my thoughts, ideas, and experiments. It is a place where I can share my work and my process with the world.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONTACT / FOOTER
+═══════════════════════════════════════════════════════════════ -->
+<section id="contact">
+    <div style=" width: 100%; height: 100%; position: absolute; top: 0; left: 0;" data-static-grid></div>
+    <div class="container-text" data-grid-above>
+        <div class="contact-content">
+            <div class="contact-info">
+                <a data-crop-reveal href="mailto:darshandaiv@gmail.com" class="text-subtitle">darshandaiv@gmail.com</a>
+                <a data-crop-reveal href="tel:+919325747315" class="text-subtitle">+91 93257 47315</a>
+            </div>
+            <div class="contact-text">
+                <div class="footer-links">
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/darshan.grid/">Instagram</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.behance.net/darshandaiv">Behance</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
+                    <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
+                </div>
+                <div class="footer-links" >
+                    <a data-crop-reveal href="../">Home</a>
+                    <a data-crop-reveal href="../projects/">Projects</a>
+                    <a data-crop-reveal href="../expedition">Expeditions</a>
+                    <a data-crop-reveal href="../playbook">Playbook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ticker" data-ticker data-copy-email="darshandaiv@gmail.com" data-grid-above>
+        <span data-ticker-item>Say Hello, don't be shy.</span>
+    </div>
+    <div class="container-text" data-grid-above>
+        <div class="footer-links">
+            <p class="text-copyright"><span>©</span> Darshan Daiv 2026 • Proudly hand-coded</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════════════════ -->
+<script src="../javascript/script.js"></script>
+<script src="../javascript/smooth-scrollbar.js"></script>
+<script src="../javascript/scroll-distort.js"></script>
+<script src="../javascript/cms-projects.js"></script>
+<script src="../javascript/text-crop-reveal.js"></script>
+<script src="../javascript/cursor-copy-ticker.js"></script>
+<script src="../javascript/static-grid.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const wraps = document.querySelectorAll('.video-wrap');
+
+    wraps.forEach((wrap) => {
+        const video = wrap.querySelector('.modern-video');
+        if (!video) return;
+
+        let hideTimeout = null;
+        let isHovering = false;
+        const INACTIVITY_DELAY = 2000;
+
+        function showControls() {
+            wrap.classList.add('controls-visible');
+            clearTimeout(hideTimeout);
+        }
+
+        function scheduleHide() {
+            clearTimeout(hideTimeout);
+            if (!video.paused) {
+                hideTimeout = setTimeout(() => {
+                    wrap.classList.remove('controls-visible');
+                }, INACTIVITY_DELAY);
+            }
+        }
+
+        function togglePlay() {
+            if (video.paused) {
+                video.play().catch(() => {});
+            } else {
+                video.pause();
+            }
+        }
+
+        wrap.addEventListener('click', () => {
+            togglePlay();
+            showControls();
+            scheduleHide();
+        });
+
+        wrap.addEventListener('mouseenter', () => {
+            isHovering = true;
+            showControls();
+            scheduleHide();
+        });
+
+        wrap.addEventListener('mouseleave', () => {
+            isHovering = false;
+            clearTimeout(hideTimeout);
+            if (!video.paused) wrap.classList.remove('controls-visible');
+        });
+
+        wrap.addEventListener('mousemove', () => {
+            if (!isHovering) return;
+            showControls();
+            scheduleHide();
+        });
+
+        wrap.addEventListener('touchstart', () => {
+            showControls();
+            scheduleHide();
+        }, { passive: true });
+
+        video.addEventListener('play', () => {
+            wrap.classList.add('is-playing');
+            showControls();
+            scheduleHide();
+        });
+
+        video.addEventListener('pause', () => {
+            wrap.classList.remove('is-playing');
+            clearTimeout(hideTimeout);
+        });
+
+        video.addEventListener('waiting', () => wrap.classList.add('is-loading'));
+        video.addEventListener('playing', () => wrap.classList.remove('is-loading'));
+
+        video.addEventListener('ended', () => {
+            video.currentTime = 0;
+            wrap.classList.remove('is-playing');
+        });
+    });
+});
+</script>
+
+</body>
+</html>
