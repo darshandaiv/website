@@ -6,14 +6,14 @@
 
     <!-- PATH NOTE: This file lives inside /projects/, one folder
          level below the site root. Every root-relative asset link
-         below is prefixed with "../" to resolve correctly. -->
-    <link rel="icon" type="image/svg+xml" href="../assets/svg/logo.svg">
-    <link rel="stylesheet" href="../css/style.css">
+         below is prefixed with "./" to resolve correctly. -->
+    <link rel="icon" type="image/svg+xml" href="./assets/svg/logo.svg">
+    <link rel="stylesheet" href="./css/style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+    <script type="module" src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
 </head>
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -71,11 +71,11 @@
     </div>
     <div class="fs-menu-inner">
         <ul class="fs-nav-list">
-            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/"><span class="fs-nav-num">01 </span>Home</a></li>
-            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/projects/"><span class="fs-nav-num">02 </span>Projects</a></li>
-            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/expedition"><span class="fs-nav-num">03 </span>Expeditions</a></li>
-            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/playbook"><span class="fs-nav-num">04 </span>PlayBook</a></li>
-            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/hello"><span class="fs-nav-num">05 </span>Say Hello!</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="./assets/videos/waves.mp4" href="/"><span class="fs-nav-num">01 </span>Home</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="./assets/videos/waves.mp4" href="/projects/"><span class="fs-nav-num">02 </span>Projects</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="./assets/videos/waves.mp4" href="/expedition"><span class="fs-nav-num">03 </span>Expeditions</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="./assets/videos/waves.mp4" href="/playbook"><span class="fs-nav-num">04 </span>PlayBook</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="./assets/videos/waves.mp4" href="/hello"><span class="fs-nav-num">05 </span>Say Hello!</a></li>
         </ul>
     </div>
     <div class="fs-menu-footer">
@@ -129,10 +129,10 @@
                     <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
                 </div>
                 <div class="footer-links" >
-                    <a data-crop-reveal href="../">Home</a>
-                    <a data-crop-reveal href="../projects/">Projects</a>
-                    <a data-crop-reveal href="../expedition">Expeditions</a>
-                    <a data-crop-reveal href="../playbook">Playbook</a>
+                    <a data-crop-reveal href="./">Home</a>
+                    <a data-crop-reveal href="./projects/">Projects</a>
+                    <a data-crop-reveal href="./expedition">Expeditions</a>
+                    <a data-crop-reveal href="./playbook">Playbook</a>
                 </div>
             </div>
         </div>
@@ -161,21 +161,21 @@
      paragraphs (case-body/case-summary) via renderCaseStudy(), so
      it's genuinely required on this page (unlike projects/index.html).
 ═══════════════════════════════════════════════════════════════ -->
-<script src="../javascript/projects-data.js"></script>
-<script src="../javascript/script.js"></script>
-<script src="../javascript/cms-projects.js"></script>
-<script src="../javascript/scroll-distort.js"></script>
-<script src="../javascript/smooth-scrollbar.js"></script>
-<script src="../javascript/text-crop-reveal.js"></script>
-<script src="../javascript/cursor-copy-ticker.js"></script>
-<script>
+<script type="module" src="./javascript/projects-data.js"></script>
+<script type="module" src="./javascript/script.js"></script>
+<script type="module" src="./javascript/cms-projects.js"></script>
+<script type="module" src="./javascript/scroll-distort.js"></script>
+<script type="module" src="./javascript/smooth-scrollbar.js"></script>
+<script type="module" src="./javascript/text-crop-reveal.js"></script>
+<script type="module" src="./javascript/cursor-copy-ticker.js"></script>
+<script type="module">
     document.addEventListener('DOMContentLoaded', () => {
         renderCaseStudy();
     });
 </script>
-<script src="../javascript/scroll-text.js"></script>
-<script src="../javascript/scroll-zoom.js"></script>
-<script src="../javascript/static-grid.js"></script>
+<script type="module" src="./javascript/scroll-text.js"></script>
+<script type="module" src="./javascript/scroll-zoom.js"></script>
+<script type="module" src="./javascript/static-grid.js"></script>
 
 </body>
 </html>
