@@ -41,7 +41,7 @@ jobs:
 
       # 2. Install your three.js and vite packages
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       # 3. Build the production dist folder via Vite
       - name: Build project
