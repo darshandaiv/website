@@ -31,13 +31,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # 1. Setup Node.js environment
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # 2. Install your three.js and vite packages
+      - name: Install dependencies
+        run: npm ci
+
+      # 3. Build the production dist folder via Vite
+      - name: Build project
+        run: npm run build
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          # ❌ CHANGE THIS: Change '.' to './dist'
+          path: './dist'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

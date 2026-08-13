@@ -1,3 +1,24 @@
+// 1. Import Core Three.js
+import * as THREE from 'three';
+
+// 2. Import Controls and Loaders
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+// 3. Import Postprocessing Core
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+
+// 4. Import Specific Shaders and Passes
+import { CopyShader } from 'three/examples/jsm/shaders/CopyShader.js';
+import { LuminosityHighPassShader } from 'three/examples/jsm/shaders/LuminosityHighPassShader.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
+
+// --- YOUR EXISTING APP.JS CODE STARTS HERE ---
+
+
 // ─────────────────────────────────────────────────────
 // SCENE
 // ─────────────────────────────────────────────────────
@@ -95,16 +116,16 @@ renderer.shadowMap.type      = THREE.PCFSoftShadowMap;
 // ─────────────────────────────────────────────────────
 // POST PROCESSING
 // ─────────────────────────────────────────────────────
-const composer = new THREE.EffectComposer(renderer);
-composer.addPass(new THREE.RenderPass(scene, camera));
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
 
-const bloom = new THREE.UnrealBloomPass(
+const bloom = new UnrealBloomPass(
   new THREE.Vector2(100, 100),
   0, 0.8, 0.1
 );
 composer.addPass(bloom);
 
-const fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
+const fxaaPass = new ShaderPass(FXAAShader);
 composer.addPass(fxaaPass);
 
 // ─────────────────────────────────────────────────────
@@ -324,7 +345,7 @@ window.getCam = function () {
 // ─────────────────────────────────────────────────────
 // MODEL LOADER
 // ─────────────────────────────────────────────────────
-const loader = new THREE.GLTFLoader();
+const loader = new GLTFLoader();
 
 loader.load(
   '../assets/models/Web_Hero_Concept.glb',
