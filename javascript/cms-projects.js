@@ -62,7 +62,7 @@ function buildWorkCard(project, delayClass = "") {
    Renders the homepage Work section (index.html)
    — shows only projects where featured: true
 ---------------------------------------------------------------- */
-function renderWorkSection() {
+export function renderWorkSection() {
     const grid = document.getElementById('workGrid');
     if (!grid || !window.PROJECTS) return;
 
@@ -74,7 +74,6 @@ function renderWorkSection() {
 
     window.initInteractions(grid);
     attachWorkCardVideoHover(grid);
-    window.renderWorkSection = renderWorkSection;
 
 }
 

@@ -23,6 +23,9 @@
    • cursorDot  → sticks exactly to the mouse (no lag)
    • cursorRing → lerps (smoothly follows) behind using rAF
 ================================================================ */
+import { renderWorkSection } from './cms-projects.js';
+
+
 const cursorDot  = document.getElementById('cursorDot');
 const cursorRing = document.getElementById('cursorRing');
 
@@ -488,3 +491,8 @@ setInterval(updateDateTime, 1000);
    cms-projects.js after render.
 ================================================================ */
 initInteractions(document);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderWorkSection();
+});
