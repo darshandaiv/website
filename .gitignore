@@ -1,0 +1,6 @@
+# Block heavy development folders
+node_modules/
+.DS_Store
+
+# Block Vite build outputs (only push raw code, GitHub Actions builds it)
+dist/
