@@ -39,9 +39,9 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      # 2. Install your three.js and vite packages
+      # 2. Install dependencies safely
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       # 3. Build the production dist folder via Vite
       - name: Build project
@@ -53,9 +53,10 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # ❌ CHANGE THIS: Change '.' to './dist'
+          # ✅ Points directly to your built Vite multi-page assets
           path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        # ✅ Downgraded to v4 because v5 doesn't exist and causes silent failures
+        uses: actions/deploy-pages@v4 

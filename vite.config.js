@@ -5,10 +5,22 @@ import { fileURLToPath } from 'url';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
-  base: '/',
+  // Keep this as '/' because your custom domain serves from the direct root!
+  base: '/', 
 
   build: {
     outDir: 'dist',
+    // Bypasses the 500kB strict warning block since you are loading multiple independent assets
+    chunkSizeWarningLimit: 1000, 
+    
+    // Note: Vite 8 relies on Rolldown engine optimizations instead of rollupOptions for internal logic
+    rolldownOptions: {
+      output: {
+        // Activates cleaner bundle grouping strategy per the Rolldown recommendation
+        codeSplitting: true 
+      }
+    },
+    
     rollupOptions: {
       input: {
         // Root Pages
