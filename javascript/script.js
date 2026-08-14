@@ -2,30 +2,27 @@
 
 /* ================================================================
    SCRIPT.JS — CORE SITE INTERACTIONS
-   Handles global UI behaviour shared across every page:
-   custom cursor, fullscreen menu, scroll progress, nav video
-   previews, reusable interaction attachers, and the live clock
-   (hello.html only).
-
-   NOTE: CMS/project-rendering logic (work grid, case studies) now
-   lives in cms-projects.js. This file must load BEFORE
-   cms-projects.js, since it exposes initInteractions() on window
-   for that file to reuse on dynamically injected content.
-
-   NOTE: The rotating "copy email / button" cursor ticker widget
-   (previously embedded inline in this file) now lives in its own
-   file: cursor-copy-ticker.js. Load it separately where needed.
 ================================================================ */
+
+// 1. Import dependencies and modular scripts
+import * as THREE from 'three'; 
+
+import './app.js';
+import './loader.js';
+import './projects-data.js';
+import './cms-projects.js';
+import './scroll-distort.js';
+import './logo-ticker.js';
+import './text-crop-reveal.js';
+import './smooth-scrollbar.js';
+import './cursor-copy-ticker.js';
+import './scroll-zoom.js';
+import './dotgrid.js';
+import './static-grid.js';
 
 /* ================================================================
    SECTION 1 — CUSTOM CURSOR
-   Two layers:
-   • cursorDot  → sticks exactly to the mouse (no lag)
-   • cursorRing → lerps (smoothly follows) behind using rAF
 ================================================================ */
-import { renderWorkSection } from './cms-projects.js';
-
-
 const cursorDot  = document.getElementById('cursorDot');
 const cursorRing = document.getElementById('cursorRing');
 
@@ -116,6 +113,7 @@ navLinks.forEach((link) => {
     link.addEventListener('mouseenter', function () {
         if (!mainVideo || !videoSource) return;
         const newVideoSrc = this.getAttribute('data-video');
+        if (!newVideoSrc) return;
 
         mainVideo.classList.remove('slide-in');
         videoSource.src = newVideoSrc;
@@ -124,7 +122,7 @@ navLinks.forEach((link) => {
         mainVideo
             .play()
             .then(() => mainVideo.classList.add('slide-in'))
-            .catch(() => {}); // Autoplay may be blocked — fails silently, no UI impact
+            .catch(() => {});
     });
 
     link.addEventListener('mouseleave', function () {
@@ -134,15 +132,7 @@ navLinks.forEach((link) => {
 
 /* ================================================================
    SECTION 4 — REUSABLE INTERACTION ATTACHERS
-   These attach cursor-hover states, magnetic movement, and scroll
-   reveal to any matching elements — including ones injected
-   dynamically later by cms-projects.js (work cards, case study
-   frames), which is why each one accepts an optional `root` param
-   instead of always querying the whole document.
 ================================================================ */
-
-/* Adds "hovered" cursor state to any interactive element found
-   inside `root` (defaults to the whole document). */
 function attachCursorHover(root = document) {
     const interactiveEls = 'a, button, .work-card, .service-row, .mag-pill, .social-btn, .fs-nav-link';
     root.querySelectorAll(interactiveEls).forEach((el) => {
@@ -157,9 +147,6 @@ function attachCursorHover(root = document) {
     });
 }
 
-/* Adds magnetic "pull toward cursor" movement to [.mag-target]
-   elements inside `root`. Skipped on mobile/tablet (<768px) since
-   there's no cursor to react to. */
 function attachMagnetic(root = document) {
     if (window.innerWidth < 768) return;
 
@@ -171,8 +158,6 @@ function attachMagnetic(root = document) {
             const dx = e.clientX - cx;
             const dy = e.clientY - cy;
 
-            // REQUIRED VALUES: tuning read from data-attributes on the
-            // element. Falls back to sensible defaults if not provided.
             const strength = parseFloat(el.getAttribute('data-mag-strength')) || 0.38;
             const speed    = parseFloat(el.getAttribute('data-mag-speed')) || 0.15;
 
@@ -189,9 +174,6 @@ function attachMagnetic(root = document) {
     });
 }
 
-/* Observes [.reveal] elements inside `root` and adds the .visible
-   class once they scroll into view, triggering their CSS reveal
-   transition. Each element is only observed once. */
 function attachReveal(root = document) {
     const revealObserver = new IntersectionObserver(
         (entries) => {
@@ -208,9 +190,6 @@ function attachReveal(root = document) {
     root.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 }
 
-/* Runs all interaction attachers on a freshly-rendered root.
-   Exposed on window so cms-projects.js can call it after injecting
-   dynamic markup (work cards, case study content, etc). */
 function initInteractions(root = document) {
     attachCursorHover(root);
     attachMagnetic(root);
@@ -220,20 +199,6 @@ window.initInteractions = initInteractions;
 
 /* ================================================================
    SECTION 5 — TEXT TICKER
-   Auto-scrolling text ticker where the font-size is calculated to
-   exactly fill the height of its container, and recalculates on
-   window resize (or container resize, via ResizeObserver).
-
-   FIX: [data-ticker] now uses overflow:hidden instead of visible.
-   The internal .ticker-track is DELIBERATELY built 2x+ wider than
-   its container (see ensureEnoughClones()) to create the seamless
-   infinite-scroll illusion — that's correct and intentional. The
-   bug was that nothing was ever clipping that oversized track to
-   its container's bounds, so the extra width bled out and caused
-   horizontal overflow on the whole page (confirmed cause of a
-   mobile scroll-stall bug elsewhere in the site). Clipping it here,
-   at the ticker's own container level, fixes the overflow at its
-   actual source — no other page-level overflow-x rules needed.
 ================================================================ */
 (function () {
     'use strict';
@@ -265,9 +230,6 @@ window.initInteractions = initInteractions;
         document.head.appendChild(styleSheet);
     }
 
-    /* Reads config from CSS custom properties (via getComputedStyle),
-       with sensible fallbacks. Values naturally update on resize since
-       getConfig() is called fresh each time initTicker() runs. */
     function getCssVar(el, name, fallback) {
         const raw = getComputedStyle(el).getPropertyValue(name).trim();
         return raw === '' ? fallback : raw;
@@ -294,9 +256,6 @@ window.initInteractions = initInteractions;
         };
     }
 
-    /* Builds the internal track structure once, wrapping the
-       original content in a "ticker-clone" span, so we can safely
-       duplicate it multiple times for seamless looping. */
     function buildTrack(el) {
         const config = getConfig(el);
 
@@ -322,8 +281,6 @@ window.initInteractions = initInteractions;
         return { track, config };
     }
 
-    /* Sizes the font so the text height fills the container,
-       scaled by heightRatio, clamped between min/max font sizes. */
     function applyFontSize(el, config) {
         const containerHeight = el.clientHeight;
         if (containerHeight <= 0) return;
@@ -334,11 +291,6 @@ window.initInteractions = initInteractions;
         el.style.fontSize = clampedSize + 'px';
     }
 
-    /* Ensures enough clones exist in the track to seamlessly cover
-       at least 2x the container's width (so there's always content
-       ready to scroll into view without gaps). This intentionally
-       makes .ticker-track wider than its container — that's why
-       [data-ticker] above now clips with overflow:hidden. */
     function ensureEnoughClones(el, track, config) {
         const containerWidth = el.clientWidth;
         const originalContent = el.getAttribute('data-ticker-content');
@@ -366,11 +318,6 @@ window.initInteractions = initInteractions;
         return { singleWidth };
     }
 
-    /* Runs the continuous scroll animation via requestAnimationFrame,
-       looping the track position seamlessly once it has scrolled past
-       exactly one "single item" width. Speed eases toward a target
-       multiplier on hover (1 = normal, 0 = stopped, between = slowed),
-       based on data-ticker-hover-behavior. */
     function animateTicker(el, track, config, singleWidth) {
         let position = 0;
         let lastTimestamp = null;
@@ -418,9 +365,6 @@ window.initInteractions = initInteractions;
         return { stop: () => cancelAnimationFrame(rafId) };
     }
 
-    /* Initializes a single ticker element: builds the track, sizes
-       the font, clones enough copies, and starts the animation.
-       Re-run on resize to recalculate everything from scratch. */
     function initTicker(el) {
         if (el._tickerInstance) el._tickerInstance.stop();
 
@@ -468,31 +412,25 @@ window.initInteractions = initInteractions;
 
 /* ================================================================
    SECTION 6 — LIVE CLOCK (hello.html only)
-   FIX: added a guard clause since #live-time only exists on
-   hello.html — previously this threw a silent error on every other
-   page, every second, via setInterval.
 ================================================================ */
 function updateDateTime() {
     const timeEl = document.getElementById('live-time');
-    if (!timeEl) return; // Not on this page — nothing to update
+    if (!timeEl) return;
 
     const now = new Date();
     timeEl.textContent = now.toLocaleTimeString('en-US', { hour12: false });
 }
 
-updateDateTime();
-setInterval(updateDateTime, 1000);
+if (document.getElementById('live-time')) {
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+}
 
 /* ================================================================
    SECTION 7 — INITIAL PAGE-LOAD INTERACTION BINDING
-   Attaches cursor/magnetic/reveal to elements that exist statically
-   on page load. Dynamically injected content (work cards, case
-   study body) calls initInteractions() separately from
-   cms-projects.js after render.
 ================================================================ */
-initInteractions(document);
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    renderWorkSection();
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => initInteractions(document));
+} else {
+    initInteractions(document);
+}
