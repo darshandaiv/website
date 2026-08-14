@@ -95,7 +95,7 @@
                   false → appears only on projects/index.html.
 ================================================================ */
 
-export const PROJECTS = [
+const PROJECTS = [
   {
     id: "fluent-design",
     slug: "fluent-design",

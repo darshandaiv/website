@@ -147,6 +147,7 @@
     }
 
     drawDots();
+    console.log('[dotgrid] overlay initialized');
   });
 
 })();

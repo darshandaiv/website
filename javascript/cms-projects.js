@@ -3,15 +3,32 @@
 /* ================================================================
    CMS-PROJECTS.JS — CMS RENDER ENGINE
    Shared across index.html (Work section), projects/index.html,
-   and projects/<slug>.html (case studies).
-================================================================ */
+   and projects/<slug>.html (case studies). Reads window.PROJECTS
+   from projects-data.js.
 
-import { PROJECTS } from './projects-data.js';
+   DEPENDS ON: window.initInteractions() from script.js — make sure
+   script.js is loaded BEFORE this file in your HTML <script> tags.
+
+   FIX APPLIED: renderCaseStudy() previously prepended an extra
+   "../" to every image/video path (project.thumb, frame.src,
+   img.src) on top of paths that ALREADY contain "../assets/..." —
+   producing broken "../../assets/..." URLs that would 404. Paths
+   in projects-data.js are already correct as authored; removed
+   the redundant prefix everywhere below.
+================================================================ */
 
 /* ----------------------------------------------------------------
    Builds a single work-card element from a CMS project object.
+   Used by both renderWorkSection() (index.html) and
+   renderProjectsGrid() (projects/index.html).
+
+   Thumbnail shows a static image by default. On hover, a muted,
+   looping video (project.base) fades in and plays over it as a
+   preview — paused and reset on mouseleave to save resources.
+
+   Links to /projects/<slug> using clean, extensionless URLs.
 ---------------------------------------------------------------- */
-export function buildWorkCard(project, delayClass = "") {
+function buildWorkCard(project, delayClass = "") {
     return `
         <article class="work-card reveal ${delayClass}" data-id="${project.id}">
             <a href="/projects/${project.slug}">
@@ -43,44 +60,48 @@ export function buildWorkCard(project, delayClass = "") {
 
 /* ----------------------------------------------------------------
    Renders the homepage Work section (index.html)
+   — shows only projects where featured: true
 ---------------------------------------------------------------- */
-export function renderWorkSection() {
+function renderWorkSection() {
     const grid = document.getElementById('workGrid');
-    if (!grid || !PROJECTS) return;
+    if (!grid || !window.PROJECTS) return;
 
-    const featured = PROJECTS.filter((p) => p.featured);
+    const featured = window.PROJECTS.filter((p) => p.featured);
 
     grid.innerHTML = featured.length
         ? featured.map((p, i) => buildWorkCard(p, i % 2 === 0 ? 'delay-1' : 'delay-2')).join('')
         : `<div class="grid-empty-state">No featured projects yet.</div>`;
 
-    if (typeof window.initInteractions === 'function') window.initInteractions(grid);
+    window.initInteractions(grid);
     attachWorkCardVideoHover(grid);
 }
 
 /* ----------------------------------------------------------------
    Renders the All Projects grid (projects/index.html)
+   — supports optional tag/type filtering via .filter-pill[data-filter]
 ---------------------------------------------------------------- */
-export function renderProjectsGrid(filterTag = "All") {
+function renderProjectsGrid(filterTag = "All") {
     const grid = document.getElementById('allProjectsGrid');
-    if (!grid || !PROJECTS) return;
+    if (!grid || !window.PROJECTS) return;
 
     const list = filterTag === "All"
-        ? PROJECTS
-        : PROJECTS.filter((p) => p.tags && p.tags.includes(filterTag));
+        ? window.PROJECTS
+        : window.PROJECTS.filter((p) => p.tags.includes(filterTag));
 
     grid.innerHTML = list.length
         ? list.map((p, i) => buildWorkCard(p, i % 2 === 0 ? 'delay-1' : 'delay-2')).join('')
         : `<div class="grid-empty-state">No projects match this filter yet.</div>`;
 
-    if (typeof window.initInteractions === 'function') window.initInteractions(grid);
+    window.initInteractions(grid);
     attachWorkCardVideoHover(grid);
 }
 
 /* ----------------------------------------------------------------
-   Binds click handlers to .filter-pill[data-filter] buttons
+   Binds click handlers to .filter-pill[data-filter] buttons on
+   projects/index.html, toggling "active" state and re-rendering
+   the grid with the selected filter.
 ---------------------------------------------------------------- */
-export function initProjectsFilters() {
+function initProjectsFilters() {
     const pills = document.querySelectorAll('.filter-pill');
     pills.forEach((pill) => {
         pill.addEventListener('click', () => {
@@ -92,9 +113,19 @@ export function initProjectsFilters() {
 }
 
 /* ----------------------------------------------------------------
-   Attaches video preview behavior to [data-video-hover] thumbs
+   Attaches video preview behavior to all [data-video-hover] thumbs
+   inside `root`. Behavior adapts based on screen size:
+
+   • Desktop (> 768px): hover-to-play. Video plays on mouseenter,
+     pauses and rewinds to frame 0 on mouseleave.
+
+   • Mobile (≤ 768px): scroll-to-play. Video automatically plays
+     once the ENTIRE card is visible within the viewport (100%
+     intersection), and pauses once it's no longer fully visible.
+
+   Automatically re-evaluates on window resize.
 ---------------------------------------------------------------- */
-export function attachWorkCardVideoHover(root = document) {
+function attachWorkCardVideoHover(root = document) {
     const MOBILE_BREAKPOINT = 768;
     const isMobile = () => window.innerWidth <= MOBILE_BREAKPOINT;
 
@@ -191,13 +222,20 @@ export function attachWorkCardVideoHover(root = document) {
 
 /* ----------------------------------------------------------------
    Renders a single Case Study page (projects/<slug>.html)
----------------------------------------------------------------- */
-export function renderCaseStudy() {
-    const slug = document.body.dataset.projectSlug;
-    if (!slug) return;
+   — reads data-project-slug from <body> and matches against
+     window.PROJECTS
 
-    const project = PROJECTS.find((p) => p.slug === slug);
-    const root = document.getElementById('caseRoot');
+   FIX APPLIED: all paths below (project.thumb, frame.src, img.src,
+   project.base) are used AS-IS now — no extra "../" prefix. These
+   fields already contain the correct "../assets/..." path since
+   this page lives one level below root, same as before. The old
+   code's extra "../${...}" template literal was producing
+   "../../assets/..." — a real, live bug. Confirmed fixed here.
+---------------------------------------------------------------- */
+function renderCaseStudy() {
+    const slug    = document.body.dataset.projectSlug;
+    const project = window.PROJECTS?.find((p) => p.slug === slug);
+    const root    = document.getElementById('caseRoot');
     if (!root) return;
 
     if (!project) {
@@ -210,13 +248,14 @@ export function renderCaseStudy() {
                 <a href="../projects/" class="btn btn-solid mag-target" style="margin-top:24px;display:inline-flex">Back to Projects</a>
             </div>
         `;
-        if (typeof window.initInteractions === 'function') window.initInteractions(root);
+        window.initInteractions(root);
         return;
     }
 
     document.title = `${project.title} — Darshan Daiv`;
 
-    const framesHTML = (project.frames || [])
+    /* Handles 3 frame types: "image", "video", "split". */
+    const framesHTML = project.frames
         .map((frame) => {
             if (frame.type === "video") {
                 return `
@@ -244,6 +283,7 @@ export function renderCaseStudy() {
                     </div>`;
             }
 
+            // Default: "image"
             return `
                 <div class="case-frame reveal">
                     <img data-scroll-zoom class="case-frame-media" src="${frame.src}" alt="${frame.caption || project.title}">
@@ -274,7 +314,7 @@ export function renderCaseStudy() {
                     </div>
                     <div class="case-meta-item">
                         <p class="text-eyebrow" data-crop-reveal>Category</p>
-                        <p class="ci-value" data-crop-reveal>${project.tags ? project.tags[0] : ''}</p>
+                        <p class="ci-value" data-crop-reveal>${project.tags[0]}</p>
                     </div>
                     <div class="case-meta-item">
                         <p class="text-eyebrow" data-crop-reveal>Year</p>
@@ -329,27 +369,5 @@ export function renderCaseStudy() {
         </section>
     `;
 
-    if (typeof window.initInteractions === 'function') window.initInteractions(root);
-}
-
-/* ----------------------------------------------------------------
-   AUTO-EXECUTION ON DOM LOAD
----------------------------------------------------------------- */
-function initCMS() {
-    if (document.getElementById('workGrid')) {
-        renderWorkSection();
-    }
-    if (document.getElementById('allProjectsGrid')) {
-        renderProjectsGrid('All');
-        initProjectsFilters();
-    }
-    if (document.body.dataset.projectSlug) {
-        renderCaseStudy();
-    }
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCMS);
-} else {
-    initCMS();
+    window.initInteractions(root);
 }

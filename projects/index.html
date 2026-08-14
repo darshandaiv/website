@@ -1,15 +1,14 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Projects — Darshan Daiv</title>
+    <title>All Projects</title>
     <link rel="icon" type="image/svg+xml" href="../assets/svg/logo.svg">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-    <script type="module" src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
 </head>
 <body>
 
@@ -26,7 +25,7 @@
 ═══════════════════════════════════════════════════════════════ -->
 <nav id="navbar" data-distort-ignore>
     <div class="nav-left">
-        <a href="../" class="nav-logo">
+        <a href="/" class="nav-logo">
             <dotlottie-wc src="https://lottie.host/7c3f829d-5d73-4b70-8436-db010b175a88/NbOVLTg7fL.lottie" style="width: 40px;height: 40px" autoplay loop></dotlottie-wc>
         </a>
     </div>
@@ -36,9 +35,10 @@
         </button>
     </div>
 </nav>
-
 <!-- ═══════════════════════════════════════════════════════════════
      FULLSCREEN MENU
+     FIX: removed duplicate "class" attribute on every <a>.
+     FIX: current-page link (Projects) uses aria-current="page".
 ═══════════════════════════════════════════════════════════════ -->
 <div class="fs-menu" id="fsMenu" role="dialog" aria-modal="true" aria-label="Site navigation" data-distort-ignore>
     <div class="ascii-media">
@@ -48,11 +48,11 @@
     </div>
     <div class="fs-menu-inner">
         <ul class="fs-nav-list">
-            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="../"><span class="fs-nav-num">01 </span>Home</a></li>
-            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="../projects/" aria-current="page"><span class="fs-nav-num">02 </span>Projects</a></li>
-            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="../expedition/"><span class="fs-nav-num">03 </span>Expeditions</a></li>
-            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="../playbook/"><span class="fs-nav-num">04 </span>PlayBook</a></li>
-            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="../hello/"><span class="fs-nav-num">05 </span>Say Hello!</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/"><span class="fs-nav-num">01 </span>Home</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/projects/" aria-current="page"><span class="fs-nav-num">02 </span>Projects</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/expedition"><span class="fs-nav-num">03 </span>Expeditions</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/playbook"><span class="fs-nav-num">04 </span>PlayBook</a></li>
+            <li class="fs-nav-item"><a class="fs-nav-link fs-close-trigger" data-video="../assets/videos/waves.mp4" href="/hello"><span class="fs-nav-num">05 </span>Say Hello!</a></li>
         </ul>
     </div>
     <div class="fs-menu-footer">
@@ -66,7 +66,7 @@
     </div>
 </div>
 
-<!-- ─── ALL PROJECTS GRID + FILTERS ─── -->
+<!-- ─── ALL PROJECTS GRID + FILTERS (rendered by cms-projects.js) ─── -->
 <section id="all-projects" style="padding:150px 0 120px">
     <div class="container-text">
         <div class="section-header reveal visible">
@@ -96,7 +96,7 @@
      CONTACT / FOOTER
 ═══════════════════════════════════════════════════════════════ -->
 <section id="contact">
-    <div style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;" data-static-grid></div>
+    <div style=" width: 100%; height: 100%; position: absolute; top: 0; left: 0;" data-static-grid></div>
     <div class="container-text" data-grid-above>
         <div class="contact-content">
             <div class="contact-info">
@@ -110,11 +110,11 @@
                     <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/darshan-daiv/">LinkedIn</a>
                     <a data-crop-reveal target="_blank" rel="noopener noreferrer" href="https://www.artstation.com/darshandaiv_14">Artstation</a>
                 </div>
-                <div class="footer-links">
+                <div class="footer-links" >
                     <a data-crop-reveal href="../">Home</a>
                     <a data-crop-reveal href="../projects/">Projects</a>
-                    <a data-crop-reveal href="../expedition/">Expeditions</a>
-                    <a data-crop-reveal href="../playbook/">Playbook</a>
+                    <a data-crop-reveal href="../expedition">Expeditions</a>
+                    <a data-crop-reveal href="../playbook">Playbook</a>
                 </div>
             </div>
         </div>
@@ -131,11 +131,27 @@
 
 <!-- ═══════════════════════════════════════════════════════════════
      SCRIPTS
+     REMOVED vs. original: cursor-pixelator.js (retired).
+     KEPT: scroll-text.js — powers .scroll-reveal-text, used on
+     case-study pages linked from this grid (not on this page
+     directly, but harmless/small to preload here since users
+     navigate from this grid into case studies constantly).
 ═══════════════════════════════════════════════════════════════ -->
-<!-- 1. Must load projects-data.js so window.PROJECTS is initialized -->
-
-<!-- 2. Main Module Script -->
-<script type="module" src="../javascript/script.js"></script>
+<script src="../javascript/projects-data.js"></script>
+<script src="../javascript/script.js"></script>
+<script src="../javascript/cms-projects.js"></script>
+<script src="../javascript/scroll-distort.js"></script>
+<script src="../javascript/text-crop-reveal.js"></script>
+<script src="../javascript/smooth-scrollbar.js"></script>
+<script src="../javascript/cursor-copy-ticker.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        renderProjectsGrid('All');
+        initProjectsFilters();
+    });
+</script>
+<script src="../javascript/scroll-zoom.js"></script>
+<script src="../javascript/static-grid.js"></script>
 
 </body>
 </html>

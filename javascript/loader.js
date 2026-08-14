@@ -5,8 +5,8 @@
      CONFIGURATION
      ========================================================= */
   const CONFIG = {
-    MIN_LOADING_TIME_MS: 2000,    // Minimum load time in ms
-    SHOW_TEXT_AND_PERCENT: false, // Set to true to show percentage/subtext
+    MIN_LOADING_TIME_MS: 2000,    // Minimum load time in ms (e.g., 3000 = 3 seconds)
+    SHOW_TEXT_AND_PERCENT: false, // Set to true to show percentage/subtext, false to hide
     
     // Selectors
     wrapperSelector: '#loader-wrapper',
@@ -16,21 +16,14 @@
   };
 
   /* =========================================================
-     INITIALIZATION & GUARD CLAUSE
+     INITIALIZATION & TEXT TOGGLE
      ========================================================= */
   const wrapperEl = document.querySelector(CONFIG.wrapperSelector);
-
-  // CRITICAL GUARD: If this page does not have a loader, exit immediately!
-  if (!wrapperEl) {
-    document.body.classList.add('is-ready');
-    return;
-  }
-
   const barEl = document.querySelector(CONFIG.barSelector);
   const percentEl = document.querySelector(CONFIG.percentSelector);
   const msgEl = document.querySelector(CONFIG.msgSelector);
 
-  // Hide percentage and subtext if configured
+  // Hide or show percentage and subtext according to CONFIG
   if (!CONFIG.SHOW_TEXT_AND_PERCENT) {
     if (percentEl) percentEl.style.display = 'none';
     if (msgEl) msgEl.style.display = 'none';
@@ -40,14 +33,7 @@
      REAL LOADING & TIME TRACKING
      ========================================================= */
   const startTime = Date.now();
-  
-  // FIX FOR CACHED/FAST LOADS: Check document.readyState immediately
-  let isWindowLoaded = document.readyState === 'complete';
-
-  if (!isWindowLoaded) {
-    window.addEventListener('load', () => { isWindowLoaded = true; }, { once: true });
-  }
-
+  let isWindowLoaded = false;
   let totalResources = 0;
   let loadedResources = 0;
 
@@ -68,8 +54,10 @@
     });
   }
 
+  window.addEventListener('load', () => { isWindowLoaded = true; });
+
   /* =========================================================
-     ANTICIPATION LOADER LOOP
+     ANTICIPATION LOADER LOOP (PROGRESS AND SLOW)
      ========================================================= */
   let currentProgress = 0;
   let tick = 0;
@@ -79,32 +67,34 @@
     const elapsedTime = Date.now() - startTime;
     const timeProgress = Math.min((elapsedTime / CONFIG.MIN_LOADING_TIME_MS) * 100, 100);
 
+    // Asset and DOM loading progress calculation
     const assetRatio = totalResources > 0 ? (loadedResources / totalResources) : 1;
     let domRatio = document.readyState === 'complete' || isWindowLoaded ? 1 : 0.5;
     const realProgress = ((assetRatio * 0.6) + (domRatio * 0.4)) * 100;
 
-    const fullyReady = (document.readyState === 'complete' || isWindowLoaded) && (elapsedTime >= CONFIG.MIN_LOADING_TIME_MS);
+    // Target progress capped at 99% until both actual load and min time elapse
     let target = Math.min(realProgress, timeProgress);
-
-    if (fullyReady) {
+    
+    const isFullyLoaded = isWindowLoaded && (elapsedTime >= CONFIG.MIN_LOADING_TIME_MS);
+    if (isFullyLoaded) {
       target = 100;
     } else {
       target = Math.min(target, 99);
     }
 
-    // Anticipation rhythm
+    // Anticipation rhythm: Burst -> Slow -> Crawl cycle
     const cycle = tick % 90;
     let increment = 0.4;
 
     if (cycle < 30) {
       increment = 0.9;  // Burst
     } else if (cycle < 60) {
-      increment = 0.1;  // Slow / Stall
+      increment = 0.1;  // Slow / Stall (Creates anticipation)
     } else {
       increment = 0.4;  // Crawl
     }
 
-    if (fullyReady) {
+    if (isFullyLoaded) {
       increment = 3.0; // Quick finish once fully ready
     }
 
@@ -112,20 +102,20 @@
     if (currentProgress < target) {
       currentProgress += increment;
       if (currentProgress > target) currentProgress = target;
-    } else if (currentProgress < 99 && !fullyReady) {
-      currentProgress += 0.03;
+    } else if (currentProgress < 99 && !isFullyLoaded) {
+      currentProgress += 0.03; // Slight trickle
     }
 
     if (currentProgress > 100) currentProgress = 100;
 
-    // Render bar and text
+    // Render bar and optional text
     if (barEl) barEl.style.width = `${currentProgress}%`;
     if (CONFIG.SHOW_TEXT_AND_PERCENT && percentEl) {
       percentEl.textContent = `${Math.floor(currentProgress)}%`;
     }
 
-    // Completion check
-    if (currentProgress >= 100 && fullyReady) {
+    // Complete check
+    if (currentProgress >= 100 && isFullyLoaded) {
       finishLoading();
     } else {
       requestAnimationFrame(updateLoader);
@@ -137,10 +127,12 @@
      ========================================================= */
   function finishLoading() {
     setTimeout(() => {
+      // Split horizontally open
       if (wrapperEl) wrapperEl.classList.add('loaded');
       document.body.classList.add('is-ready');
       document.body.style.overflow = '';
 
+      // Hide loader and trigger page script effects
       setTimeout(() => {
         if (wrapperEl) wrapperEl.style.display = 'none';
         initPageEffects();
@@ -149,11 +141,15 @@
     }, 300);
   }
 
+  /* =========================================================
+     TRIGGER PAGE EFFECTS (AFTER LOAD REVEAL)
+     ========================================================= */
   function initPageEffects() {
+    // Put your page animation/script initialization code here
     console.log("Page revealed. Initializing page scripts and animations...");
   }
 
-  // Start loader loop
+  // Start loader
   requestAnimationFrame(updateLoader);
 
 })();

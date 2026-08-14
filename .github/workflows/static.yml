@@ -31,32 +31,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      # 1. Setup Node.js environment
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      # 2. Install dependencies safely
-      - name: Install dependencies
-        run: npm ci
-
-      # 3. Build the production dist folder via Vite
-      - name: Build project
-        run: npm run build
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # ✅ Points directly to your built Vite multi-page assets
-          path: './dist'
-
+          # Upload entire repository
+          path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
-        # ✅ Downgraded to v4 because v5 doesn't exist and causes silent failures
-        uses: actions/deploy-pages@v4 
+        uses: actions/deploy-pages@v5
