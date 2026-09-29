@@ -106,7 +106,7 @@ const PROJECTS = [
     client: "Microsoft",
     tags: ["Motion", "3D Graphics"],
     thumb: "../assets/images/fluent-design/01.avif",
-    base: "../assets/videos/waves.mp4",
+    base: "../assets/videos/Voice Typing MFD Intro Video 03.mp4",
     description: "A 3D CGI motion design film exploring the user experience of Windows Voice Typing (Win + H) feature. This personal project conceptualizes hands-free input with a focus on Microsoft Fluent Design principles, showcasing seamless voice activation, dynamic transcription, and productivity.",
     frames: [
       { type: "image", src: "../assets/images/fluent-design/04.gif" },
