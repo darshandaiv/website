@@ -354,11 +354,19 @@ function renderCaseStudy() {
         </section>
 
         ${project.summary ? `
-        <section class="case-summary">
-            <div class="container-text">
-                <p class="text-eyebrow" data-crop-reveal>Summary</p>
-                <p class="text-subtitle scroll-reveal-text" style="max-width:100%; font-weight: 400;">${project.summary}</p>
+        <section class="about-info">
+        <div class="all-about container-text">
+            <div class="about-cards" style="width: 100%;">
+                <div class="list-of-mini">
+                    <div class="mini-experience" style="align-items: flex-start; padding-top: 0;">
+                        <div class="resp-mini" style="flex-direction: column; gap: 4px;">
+                        <p class="text-eyebrow" data-crop-reveal>Summary</p>
+                        </div>
+                        <p class="mini-info text-body" style="max-width:100%; font-weight: 400;">${project.summary}</p>
+                    </div>
+                </div>
             </div>
+        </div>
         </section>
         ` : ""}
 
@@ -371,3 +379,8 @@ function renderCaseStudy() {
 
     window.initInteractions(root);
 }
+
+/* <div class="container-text">
+    <p class="text-eyebrow" data-crop-reveal>Summary</p>
+    <p class="text-subtitle scroll-reveal-text" style="max-width:100%; font-weight: 400;">${project.summary}</p>
+</div> */

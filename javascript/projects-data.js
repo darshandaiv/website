@@ -169,7 +169,7 @@ const PROJECTS = [
     client: "University Capstone",
     tags: ["3D Graphics", "Concept Art"],
     thumb: "../assets/images/nimbus-08/01.avif",
-    base: "../assets/images/nimbus-08/02.gif",
+    base: "../assets/videos/02.mp4",
     description: "The Nimbus 08 is a versatile cargo vessel designed for long-haul missions across the cosmos. Its sleek, aerodynamic design and powerful ion engines allow it to traverse vast distances with efficiency & speed. Detachable Voyager module, which can be separated from the main vessel for independent exploration and scientific missions collecting valuable data and samples. The Nimbus 08 is built for it's gigantic capacity to ship cargo over stellar distances. It has two huge cargo sectors in it's belly with an in-built hydraulic elevator to move cargo easily.",
     frames: [
       { type: "image", src: "../assets/images/nimbus-08/09.webp" },
@@ -198,7 +198,7 @@ const PROJECTS = [
     client: "Self-Initiated",
     tags: ["Packaging", "Product Design"],
     thumb: "../assets/images/dantaushadhi/01.avif",
-    base: "../assets/images/dantaushadhi/02.webp",
+    base: "../assets/images/dantaushadhi/10.avif",
     description: "The current packaging suffers from a harsh, uninviting color scheme and outdated, inconsistent typography that lacks visual hierarchy. Poor image placement and cluttered layout disrupt readability and fail to highlight key product information. There's no clear brand identity, making it appear generic and forgettable. Additionally, the wide bottle opening leads to unhygienic and inconvenient product usage.",
     frames: [
       { type: "image", src: "../assets/images/dantaushadhi/05.avif" },
@@ -210,8 +210,7 @@ const PROJECTS = [
         ]
       },
       { type: "image", src: "../assets/images/dantaushadhi/08.webp" },
-      { type: "image", src: "../assets/images/dantaushadhi/09.webp" },
-      { type: "image", src: "../assets/images/dantaushadhi/10.avif" }
+      { type: "image", src: "../assets/images/dantaushadhi/09.webp" }
     ],
     summary: "Through this redesign, I successfully transformed a generic, uninviting product into a visually trustworthy and sophisticated brand. The new packaging's blend of cultural authenticity and modern design not only creates a memorable presence but also builds immediate trust with the consumer. Furthermore, I provided a scalable design foundation that ensures future product lines will maintain a cohesive brand identity, while also solving the functional issues of the original packaging to enhance the overall user experience.",
     featured: false
@@ -226,7 +225,7 @@ const PROJECTS = [
     client: "Self-Initiated",
     tags: ["Interaction", "Interface Design"],
     thumb: "../assets/images/void/06.avif",
-    base: "../assets/images/void/01.gif",
+    base: "../assets/videos/01.mp4",
     description: "Void One Ul is a conceptual Apple Watch interface inspired by the silence and sophistication of space. Designed for space exploration enthusiasts, it brings the feeling of cosmic navigation right to your wrist.",
     frames: [
       { type: "image", src: "../assets/images/void/04.webp" },
@@ -255,7 +254,7 @@ const PROJECTS = [
     client: "Self-Initiated",
     tags: ["Publication", "3D Graphics"],
     thumb: "../assets/images/origami/01.avif",
-    base: "../assets/images/origami/02.webp",
+    base: "../assets/videos/float.mp4",
     description: "The art style employed in this project combines the warmth and expressive qualities of traditional painting with the precision and dimensionality of 3D rendered Illustrations. I embarked on this project as a personal exploration into visual storytelling. My initial research was a poetic journey into the concept of contrasting dreams and a search for harmony in their simplicity.",
     frames: [
       { type: "image", src: "../assets/images/origami/06.webp" },
