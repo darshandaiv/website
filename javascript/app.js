@@ -61,8 +61,8 @@ const targetHeadEuler = new THREE.Euler(0, 0, 0, 'YXZ');
 // ─────────────────────────────────────────────────────
 let gyroEnabled         = false;
 let gyroVerticalEnabled = false;
-let gyroTargetTheta     = Math.PI * 1.14;
-let gyroTargetPhi       = Math.PI / 1.5;
+let gyroTargetTheta     = Math.PI * 1;
+let gyroTargetPhi       = Math.PI / 1;
 
 // ─────────────────────────────────────────────────────
 // ANIMATION STATE

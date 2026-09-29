@@ -147,7 +147,7 @@ data-distort-enabled                   <!-- "true" or "false" — set false to f
     // the fisheye displacement map's rounding. This effect is primarily
     // a desktop hover/scroll-feel enhancement anyway; mobile gets
     // native, unmodified scrolling instead.
-    const MOBILE_DISTORT_BREAKPOINT = 0;
+    const MOBILE_DISTORT_BREAKPOINT = 480;
     if (!CONFIG.enabled || window.innerWidth < MOBILE_DISTORT_BREAKPOINT) return;
 
     const FILTER_ID = 'scroll-distort-filter';
